@@ -1,5 +1,6 @@
 #include "Tank.h"
 #include "Bullet.h"
+#include "Stats.h"
 #include <iostream>
 
 Tank::Tank(float x, float y, float speed, const std::string& texturePath, const std::string& texturePathHitted) {
@@ -17,7 +18,7 @@ Tank::Tank(float x, float y, float speed, const std::string& texturePath, const 
 
 void Tank::moveLeft() {
     sf::Vector2f position = body.getPosition();
-    direction = sf::Vector2f(-0.5f, 0);
+    direction = sf::Vector2f(-5.0f, 0);
     
 
     if (position.x - speed >= 25) {
@@ -28,7 +29,7 @@ void Tank::moveLeft() {
 
 void Tank::moveRight() {
     sf::Vector2f position = body.getPosition();
-    direction = sf::Vector2f(0.5f, 0);
+    direction = sf::Vector2f(5.0f, 0);
 
     if (position.x + speed <= 875) {
         body.move(speed, 0);
@@ -38,7 +39,7 @@ void Tank::moveRight() {
 
 void Tank::moveTop() {
     sf::Vector2f position = body.getPosition();
-    direction = sf::Vector2f(0, -0.5f);
+    direction = sf::Vector2f(0, -5.0f);
 
     if (position.y - speed >= 25) {
         body.move(0, -speed);
@@ -48,7 +49,7 @@ void Tank::moveTop() {
 
 void Tank::moveBottom() {
     sf::Vector2f position = body.getPosition();
-    direction = sf::Vector2f(0, 0.5f);
+    direction = sf::Vector2f(0, 5.0f);
 
     if (position.y + speed <= 775) {
         body.move(0, speed);
@@ -102,5 +103,6 @@ void Tank::setHealthPoints(int points) {
 
 void Tank::enemyGetKilled() {
     body.setPosition(11000, 11000);
+    
     std::cout << "killed";
 }

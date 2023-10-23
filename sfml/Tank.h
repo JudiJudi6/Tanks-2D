@@ -1,8 +1,10 @@
 #ifndef TANK_H
 #define TANK_H
+#pragma once
+
 #include <SFML/Graphics.hpp>
 #include "Bullet.h"
-
+#include "Stats.h"
 class Tank {
 private:
     sf::Texture texture;
@@ -28,4 +30,6 @@ public:
     void setHealthPoints(int points);
     void getHittedAnimation();
 }; 
+
+#undef TANK_H
 #endif // TANK_H

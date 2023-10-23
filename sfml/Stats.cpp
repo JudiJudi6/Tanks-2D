@@ -1,23 +1,31 @@
 #include "Stats.h"
+//#include "Tank.h"
 
 
-Stats::Stats() {};
+Stats::Stats() {
+   this->hp = 0;
+   this->kills = 0;
+   this->dmgBullet = 100;
+   //this->gameClock = 0;
+};
 
-void Stats::displayStats(sf::RenderWindow& window) const {
+
+void Stats::displayStats(sf::RenderWindow& window) {
     sf::Font font;
-    font.loadFromFile("arial.ttf"); // Za³aduj czcionkê
-
     sf::Text text;
+    font.loadFromFile("roboto.ttf");
     text.setFont(font);
-    text.setCharacterSize(24);
-    text.setFillColor(sf::Color::White);
+    text.setCharacterSize(15);
+    text.setFillColor(sf::Color::Black);
 
-    text.setString("Kills: " + std::to_string(kills) +
-        "\nGame Time: " + std::to_string(gameTime) + " seconds" +
-        "\nHP: " + std::to_string(hp) +
-        "\nDamage Bullet: " + std::to_string(dmgBullet));
+    text.setString("Kills: " + kills);
 
-    text.setPosition(10, 10); // Ustaw pozycjê tekstu na ekranie
+    text.setPosition(950, 200); // Ustaw pozycjê tekstu na ekranie
 
     window.draw(text);
 }
+
+void Stats::addKill() {
+    kills++;
+}
+

@@ -1,6 +1,6 @@
 #ifndef BULLET_H
 #define BULLET_H
-
+#pragma once
 #include <SFML/Graphics.hpp>
 
 class Bullet
@@ -23,6 +23,6 @@ public:
 
     int getDamage();
 };
-
+#undef BULLET_H
 #endif // BULLET_H
 

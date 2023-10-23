@@ -2,6 +2,7 @@
 #include "Tank.h"
 #include "Bullet.h"
 #include "EnemyTank.h"
+#include "Stats.h"
 
 int main()
 {
@@ -9,12 +10,14 @@ int main()
     sf::RectangleShape map;
     sf::RectangleShape panel;
 
+    //stats
+
     // Gracz
-    Tank playerTank(100, 100, 0.1f, "player.png", "playerHitted.png");
+    Tank playerTank(100, 100, 1.0f, "player.png", "playerHitted.png");
     Bullet playerBullet;
 
     //enemy 1
-    Tank enemy1Tank(800, 600, 0.09f, "enemy.png", "enemyHitted.png");
+    Tank enemy1Tank(800, 600, 0.9f, "enemy.png", "enemyHitted.png");
     //Bullet enemy1bullet;
 
     sf::Texture mapTexture;
@@ -28,6 +31,10 @@ int main()
     panel.setTexture(&panelTexture);
     panel.setPosition(900, 0);
     //map.setPosition(100, 50);
+
+    Stats gameStats;
+
+
 
     while (window.isOpen()) {
         sf::Event evnt;
@@ -66,12 +73,14 @@ int main()
         enemy1Tank.getHitted(playerBullet);
         playerBullet.updateBullet();
         enemy1Tank.getHittedAnimation();
+
         window.clear();
         window.draw(map);
         playerBullet.drawBullet(window);
         window.draw(playerTank.body);  
         window.draw(enemy1Tank.body);
         window.draw(panel);
+        gameStats.displayStats(window);
         window.display();
 
     }
