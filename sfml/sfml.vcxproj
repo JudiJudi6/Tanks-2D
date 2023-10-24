@@ -137,12 +137,14 @@
     <ClCompile Include="EnemyTank.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Stats.cpp" />
+    <ClCompile Include="StatsWindow.cpp" />
     <ClCompile Include="Tank.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Bullet.h" />
     <ClInclude Include="EnemyTank.h" />
     <ClInclude Include="Stats.h" />
+    <ClInclude Include="StatsWindow.h" />
     <ClInclude Include="Tank.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

@@ -103,6 +103,15 @@ void Tank::setHealthPoints(int points) {
 
 void Tank::enemyGetKilled() {
     body.setPosition(11000, 11000);
+    this->destroyedTanks++; //wtf
     
     std::cout << "killed";
+    std::cout << destroyedTanks;
+}
+
+void Tank::addKill() {
+}
+
+int Tank::getKills() {
+    return destroyedTanks;
 }

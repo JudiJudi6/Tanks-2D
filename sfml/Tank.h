@@ -12,6 +12,7 @@ private:
     sf::Clock hitClock;
     float speed;
     bool isHitted = false;
+    int destroyedTanks = 0;
 
 public:
     Tank(float x, float y, float speed, const std::string& texturePath, const std::string& texturePathHitted);
@@ -29,6 +30,8 @@ public:
     void enemyGetKilled();
     void setHealthPoints(int points);
     void getHittedAnimation();
+    void addKill();
+    int getKills();
 }; 
 
 #undef TANK_H
