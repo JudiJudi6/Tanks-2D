@@ -12,5 +12,5 @@ private:
 public:
 	Stats();
 	void displayStats(sf::RenderWindow& window);
-	void addKill();
+	
 };

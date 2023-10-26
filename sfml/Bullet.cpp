@@ -6,7 +6,7 @@ Bullet::Bullet() {
     texture.loadFromFile("bullet.png");
     body.setOrigin(sf::Vector2f(5, 2.5));
 
-    body.setTexture(&texture);
+   // body.setTexture(&texture);
     active = false;
     shotClock.restart();
 
@@ -14,7 +14,7 @@ Bullet::Bullet() {
 }
 
 void Bullet::shot(sf::Vector2f direction, float x, float y){
-    active = true;
+    this->active = true;
 
     if (active) {
         if (shotClock.getElapsedTime().asSeconds() >= 1.0) { 
@@ -32,13 +32,14 @@ void Bullet::shot(sf::Vector2f direction, float x, float y){
                 body.setRotation(-90);
             }
             body.setPosition(x, y);
-            velocity = direction;
+            this->velocity = direction;
         }
     }
 }
 
 void Bullet::updateBullet() {
-     body.move(velocity);
+    this->body.setTexture(&texture);
+     this->body.move(velocity);
 }
 
 void Bullet::setActive(bool isActive) {

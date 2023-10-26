@@ -1,5 +1,11 @@
 #include <SFML/Graphics.hpp>
 #include "StatsWindow.h"
+#include <iostream>
+
+int destroyedTanks = 0;
+int gameTime = 0;
+bool countTime = false;
+sf::Clock gameTimeClock;
 
 void drawText(sf::RenderWindow& window, const std::string& text, int number, const sf::Vector2f& position) {
     sf::Font font;
@@ -15,4 +21,23 @@ void drawText(sf::RenderWindow& window, const std::string& text, int number, con
     displayText.setPosition(position);
 
     window.draw(displayText);
+}
+
+void addKill() {
+    destroyedTanks++;
+}
+
+void startGameTime() {
+    countTime = true;
+    gameTimeClock.restart();
+}
+
+void countGameTime() {
+    if (countTime) {
+        gameTime = gameTimeClock.getElapsedTime().asSeconds();
+    }
+}
+
+void stopGameTime() {
+    countTime = false;
 }

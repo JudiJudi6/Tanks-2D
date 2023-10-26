@@ -25,7 +25,3 @@ void Stats::displayStats(sf::RenderWindow& window) {
     window.draw(text);
 }
 
-void Stats::addKill() {
-    kills++;
-}
-
