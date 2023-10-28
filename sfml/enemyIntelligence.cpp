@@ -7,6 +7,14 @@
 #include <ctime>
 #include <random>
 #include <chrono>
+#include "Wall.h"
+#include "Brick.h"	
+#include "Box.h"
+
+std::vector<Wall> walls;
+std::vector<Brick> bricks;
+std::vector<Box> boxes;
+
 
 int generateRandomNumber(int min, int max) {
 	//std::srand(time(0));

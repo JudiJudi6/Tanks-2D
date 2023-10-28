@@ -9,10 +9,11 @@ sf::Vector2f getRandomCordsForEnemySpawn() {
     y = rand() % 751 + 25; // 25 do 775
 
 
-    if ((y >= 0 && y <= 120) || (y >= 680 && y <= 800)) {
+    if ((y >= 0 && y <= 100) || (y >= 700 && y <= 800)) {
         x = rand() % 851 + 25 ;
     } else {
-        x = (rand() % 96 < 75) ? rand() % 96 + 25 : rand() % 96 + 780; //  25 do 120 lub od 780 do 875
+     //   x = (rand() % 76 < 75) ? rand() % 76 + 25 : rand() % 76 + 800;
+        x = (rand() % 76 < 75) ? rand() % 70 + 25 : rand() % 70 + 800;
     }
 
     //std::cout << x << y;
@@ -21,17 +22,27 @@ sf::Vector2f getRandomCordsForEnemySpawn() {
 }
 
 sf::Vector2f getRandomCordsForWalls() {
+    static std::vector<int> cordXarr = { 125, 175, 225, 275, 325, 375, 525, 575, 625, 675, 725, 775 };
+    static std::vector<int> cordYarr = { 125, 175, 225, 275, 325, 475, 525, 575, 625, 675 };
+
+    static std::vector<int> availableX = cordXarr;
+    static std::vector<int> availableY = cordYarr;
+
     int x, y;
 
-    y = rand() % 560 + 120; // 25 do 775
-
-
-    if ((y >= 120 && y <= 350) || (y >= 450 && y <= 680)) {
-        x = rand() % 660 + 120;
+    if (availableX.empty() || availableY.empty()) {
+        // Resetuj dostêpne wartoœci, jeœli wszystkie zosta³y u¿yte
+        availableX = cordXarr;
+        availableY = cordYarr;
     }
-    else {
-        x = (rand() % 281 < 75) ? rand() % 281 + 120 : rand() % 281 + 500;
-    }
+
+    x = availableX[rand() % availableX.size()];
+    y = availableY[rand() % availableY.size()];
+
+    // Usuñ wybrane wartoœci z puli dostêpnych
+    availableX.erase(std::remove(availableX.begin(), availableX.end(), x), availableX.end());
+    availableY.erase(std::remove(availableY.begin(), availableY.end(), y), availableY.end());
 
     return sf::Vector2f(x, y);
 }
+

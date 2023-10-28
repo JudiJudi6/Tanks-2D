@@ -2,10 +2,13 @@
 #include "Tank.h"
 #include "Bullet.h"
 #include "EnemyTank.h"
+#include "playerTank.h"
 #include "StatsWindow.h"
 #include "renderHelpers.h"
 #include "enemyIntelligence.h"
 #include "Wall.h"
+#include "Brick.h"
+#include "Box.h"
 #include <iostream>
 #include <cstdlib>
 #include <ctime>
@@ -25,11 +28,12 @@ int main()
     //sf::Clock clock;
     //clock.restart();
 
-    const int tanksInGame = 5;
-    const int wallsInGame = 5;
+    const int tanksInGame = 3;
+    const int wallsInGame = 30;
+    const int bricksInGame = 3;
+    const int boxesInGame = 1;
     std::vector<Tank> enemyTanks;
     std::vector<Bullet> enemyBullets;
-    std::vector<Wall> walls;
 
     //stats
     //sf::Text killsCounter;
@@ -43,13 +47,21 @@ int main()
 
     
     for (int i = 0; i < tanksInGame; i++) {
-        enemyTanks.push_back(Tank(getRandomCordsForEnemySpawn(), 0.9f, "enemy.png", "enemyHitted.png"));
+        enemyTanks.push_back(Tank(getRandomCordsForEnemySpawn(), 1.5f, "enemy.png", "enemyHitted.png"));
         enemyBullets.push_back(Bullet());
        // std::cout << enemyTanks.size();
     }
 
     for (int i = 0; i < wallsInGame; i++) {
         walls.push_back(Wall(getRandomCordsForWalls(), "wall.png"));
+    }
+
+    for (int i = 0; i < bricksInGame; i++) {
+        bricks.push_back(Brick(getRandomCordsForWalls(), "Bricks.png"));
+    }
+
+    for (int i = 0; i < boxesInGame; i++) {
+        boxes.push_back(Box(getRandomCordsForWalls(), "box.png"));
     }
     
     /*
@@ -119,25 +131,7 @@ int main()
 
         playerBullet.updateBullet();
 
-       // std::cout << generateRandomNumber(0, 3) << std::endl;
-        /*
-        enemy1Tank.getHitted(playerBullet);
-        enemy2Tank.getHitted(playerBullet);
-        enemy3Tank.getHitted(playerBullet);
-        enemy1Tank.getHittedAnimation();
-        enemy2Tank.getHittedAnimation();
-        enemy3Tank.getHittedAnimation();
-        */
-        
-        
-        //std::cout << enemyTanks[1].getHealthPoints();
-        //window.draw(enemyTanks[1].body);
-
         countGameTime();
-       // enemyTanks[0].getHitted(playerBullet);
-        //enemyTanks[0].getHittedAnimation();
-       // enemyTanks[0].drawTank(window);
-      
 
 
         window.clear();
@@ -149,23 +143,41 @@ int main()
         window.draw(enemy2Tank.body);
         window.draw(enemy3Tank.body);
         */
-        for (int i = 0; i < tanksInGame; i++) {
+        for(int i = 0; i < tanksInGame; i++) {
             enemyTanks[i].getHitted(playerBullet);
             enemyTanks[i].getHittedAnimation();
-            //window.draw(enemyTanks[i].body);
             playerTank.getHitted(enemyBullets[i]);
             enemyBullets[i].drawBullet(window);
             enemyBullets[i].updateBullet();
             enemyTanks[i].drawTank(window);
-            //if (!enemyTanks[i].isInitial()) {
-              //  enemyTanks[i].getRandomDirection();
-            //}
             enemyTanks[i].enemyIntelligence(playerTank, enemyBullets[i], clock);
+        }
+
+        for (int i = 0; i < bricksInGame; i++) {
+            window.draw(bricks[i].body);
+            bricks[i].SetWallTexture();
+            for (int j = 0; j < enemyBullets.size(); j++) {
+                bricks[i].GetHitted(enemyBullets[j]);
+            }
+                bricks[i].GetHitted(playerBullet);
+        }
+
+        for (int i = 0; i < boxesInGame; i++) {
+            window.draw(boxes[i].body);
+            boxes[i].SetWallTexture();
+            for (int j = 0; j < enemyBullets.size(); j++) {
+                boxes[i].GetHitted(enemyBullets[j]);
+            }
+            boxes[i].GetHitted(playerBullet);
         }
 
         for (int i = 0; i < wallsInGame; i++) {
             window.draw(walls[i].body);
             walls[i].SetWallTexture();
+            for (int j = 0; j < enemyBullets.size(); j++) {
+                walls[i].GetHitted(enemyBullets[j]);
+            }
+                walls[i].GetHitted(playerBullet);
         }
 
         playerTank.getHittedAnimation();

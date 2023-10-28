@@ -1,16 +1,15 @@
+#include "Wall.h"
 #include <SFML/Graphics.hpp>
-#include "Bullet.h"
 
 #pragma once
-class Wall
+class Brick : public Wall 
 {
 private:
 	sf::Texture wallTexture;
-
 public:
 	sf::RectangleShape body;
 
-	Wall(sf::Vector2f position, const std::string& textureWallPath);
+	Brick(sf::Vector2f position, const std::string& textureWallPath);
 	void SetWallTexture();
 	void GetHitted(Bullet& bullet);
 };

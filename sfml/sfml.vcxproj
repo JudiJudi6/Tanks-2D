@@ -133,19 +133,25 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Box.cpp" />
+    <ClCompile Include="Brick.cpp" />
     <ClCompile Include="Bullet.cpp" />
     <ClCompile Include="enemyIntelligence.cpp" />
     <ClCompile Include="EnemyTank.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="PlayerTank.cpp" />
     <ClCompile Include="renderHelpers.cpp" />
     <ClCompile Include="StatsWindow.cpp" />
     <ClCompile Include="Tank.cpp" />
     <ClCompile Include="Wall.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Box.h" />
+    <ClInclude Include="Brick.h" />
     <ClInclude Include="Bullet.h" />
     <ClInclude Include="enemyIntelligence.h" />
     <ClInclude Include="EnemyTank.h" />
+    <ClInclude Include="PlayerTank.h" />
     <ClInclude Include="renderHelpers.h" />
     <ClInclude Include="StatsWindow.h" />
     <ClInclude Include="Tank.h" />

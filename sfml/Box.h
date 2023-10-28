@@ -2,15 +2,14 @@
 #include "Bullet.h"
 
 #pragma once
-class Wall
+class Box
 {
 private:
 	sf::Texture wallTexture;
-
 public:
 	sf::RectangleShape body;
 
-	Wall(sf::Vector2f position, const std::string& textureWallPath);
+	Box(sf::Vector2f position, const std::string& textureWallPath);
 	void SetWallTexture();
 	void GetHitted(Bullet& bullet);
 };
