@@ -9,11 +9,11 @@ sf::Vector2f getRandomCordsForEnemySpawn() {
     y = rand() % 751 + 25; // 25 do 775
 
 
-    if ((y >= 0 && y <= 100) || (y >= 700 && y <= 800)) {
+    if ((y >= 0 && y <= 60) || (y >= 740 && y <= 800)) {
         x = rand() % 851 + 25 ;
     } else {
      //   x = (rand() % 76 < 75) ? rand() % 76 + 25 : rand() % 76 + 800;
-        x = (rand() % 76 < 75) ? rand() % 70 + 25 : rand() % 70 + 800;
+        x = (rand() % 2 < 1) ? rand() % 40 + 25 : rand() % 46 + 830;
     }
 
     //std::cout << x << y;

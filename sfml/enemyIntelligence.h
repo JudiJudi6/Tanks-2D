@@ -13,6 +13,8 @@
 extern std::vector<Wall> walls;
 extern std::vector<Brick> bricks;
 extern std::vector<Box> boxes;
+extern std::vector<Tank> enemyTanks;
+extern std::vector<Bullet> enemyBullets;
 
 /*
 extern sf::Vector2f oldEnemyPosition;

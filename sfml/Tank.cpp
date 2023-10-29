@@ -2,6 +2,7 @@
 #include "Bullet.h"
 #include "StatsWindow.h"
 #include "enemyIntelligence.h"
+#include "renderHelpers.h"
 #include <iostream>
 #include "PlayerTank.h"
 
@@ -115,18 +116,37 @@ void Tank::getHitted(Bullet& playerBullet) {
     sf::FloatRect enemyBounds = body.getGlobalBounds();
     sf::FloatRect bulletBounds = playerBullet.body.getGlobalBounds();
     //addKill();
+    //std::cout << "geth";
     // kolizja
     if (enemyBounds.intersects(bulletBounds)) {
-       // std::cout << "hitted";
-        //std::cout << playerBullet.getDamage();
+        // std::cout << "hitted";
+         //std::cout << playerBullet.getDamage();
         isHitted = true;
         hitClock.restart();
         setHealthPoints(getHealthPoints() - playerBullet.getDamage());
-        bool killed = getHealthPoints() <=0;
+        killed = getHealthPoints() <= 0;
+
+
         if (killed) {
             enemyGetKilled();
-        }
+            killedTime = gameTimeClock.getElapsedTime();
+           // std::cout << "killed";
+            respawn = true;
+            killed = false;
+        }  
         playerBullet.setActive(false);
+    }
+}
+
+void Tank::respawnEnemy() {
+    if (respawn) {
+       // std::cout << killedTime.asSeconds() << std::endl;
+        if (killedTime.asSeconds() + 10 < gameTime) {
+            setHealthPoints(300);
+            body.setPosition(getRandomCordsForEnemySpawn());
+            respawn = false;
+            killedTime = gameTimeClock.getElapsedTime();
+        }
     }
 }
 
@@ -280,7 +300,7 @@ bool Tank::isWallBetweenTanks(const Tank& playerTank) {
     sf::FloatRect enemyTankBounds = body.getGlobalBounds();
 
     // SprawdŸ, czy istnieje œciana miêdzy czo³gami w osi x
-    if (std::abs(playerTankBounds.top - enemyTankBounds.top) < 20) {
+    if (std::abs(playerTankBounds.top - enemyTankBounds.top) < 50) {
         float min_x = std::min(playerTankBounds.left, enemyTankBounds.left);
         float max_x = std::max(playerTankBounds.left + playerTankBounds.width, enemyTankBounds.left + enemyTankBounds.width);
 
@@ -288,15 +308,20 @@ bool Tank::isWallBetweenTanks(const Tank& playerTank) {
             sf::FloatRect wallBounds = wall.body.getGlobalBounds();
             if (wallBounds.top + 20 > playerTankBounds.top && wallBounds.top + 20 < playerTankBounds.top + playerTankBounds.height &&
                 wallBounds.left > min_x && wallBounds.left < max_x) {
-
-                std::cout << "jest sciana";
+                return true; // Istnieje œciana w osi x
+            }
+        }
+        for (const Brick& brick: bricks) {
+            sf::FloatRect wallBounds = brick.body.getGlobalBounds();
+            if (wallBounds.top + 20 > playerTankBounds.top && wallBounds.top + 20 < playerTankBounds.top + playerTankBounds.height &&
+                wallBounds.left > min_x && wallBounds.left < max_x) {
                 return true; // Istnieje œciana w osi x
             }
         }
     }
 
     // SprawdŸ, czy istnieje œciana miêdzy czo³gami w osi y
-    if (std::abs(playerTankBounds.left - enemyTankBounds.left) < 20){
+    if (std::abs(playerTankBounds.left - enemyTankBounds.left) < 50){
         float min_y = std::min(playerTankBounds.top, enemyTankBounds.top);
         float max_y = std::max(playerTankBounds.top + playerTankBounds.height, enemyTankBounds.top + enemyTankBounds.height);
 
@@ -304,7 +329,13 @@ bool Tank::isWallBetweenTanks(const Tank& playerTank) {
             sf::FloatRect wallBounds = wall.body.getGlobalBounds();
             if (wallBounds.left + 20 > playerTankBounds.left && wallBounds.left + 20 < playerTankBounds.left + playerTankBounds.width &&
                 wallBounds.top > min_y && wallBounds.top < max_y) {
-                std::cout << "jest sciana";
+                return true; // Istnieje œciana w osi y
+            }
+        }
+        for (const Brick& brick : bricks) {
+            sf::FloatRect wallBounds = brick.body.getGlobalBounds();
+            if (wallBounds.left + 20 > playerTankBounds.left && wallBounds.left + 20 < playerTankBounds.left + playerTankBounds.width &&
+                wallBounds.top > min_y && wallBounds.top < max_y) {
                 return true; // Istnieje œciana w osi y
             }
         }

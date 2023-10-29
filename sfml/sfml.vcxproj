@@ -141,8 +141,10 @@
     <ClCompile Include="main.cpp" />
     <ClCompile Include="PlayerTank.cpp" />
     <ClCompile Include="renderHelpers.cpp" />
+    <ClCompile Include="SettingsArrow.cpp" />
     <ClCompile Include="StatsWindow.cpp" />
     <ClCompile Include="Tank.cpp" />
+    <ClCompile Include="TanksInGame.cpp" />
     <ClCompile Include="Wall.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -153,8 +155,10 @@
     <ClInclude Include="EnemyTank.h" />
     <ClInclude Include="PlayerTank.h" />
     <ClInclude Include="renderHelpers.h" />
+    <ClInclude Include="SettingsArrow.h" />
     <ClInclude Include="StatsWindow.h" />
     <ClInclude Include="Tank.h" />
+    <ClInclude Include="TanksInGame.h" />
     <ClInclude Include="Wall.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

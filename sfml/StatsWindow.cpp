@@ -7,16 +7,21 @@ int gameTime = 0;
 bool countTime = false;
 sf::Clock gameTimeClock;
 
-void drawText(sf::RenderWindow& window, const std::string& text, int number, const sf::Vector2f& position) {
+void drawText(sf::RenderWindow& window, const std::string& text, const sf::Vector2f& position, int number) {
     sf::Font font;
     font.loadFromFile("roboto.ttf"); 
-
+    std::string fullText;
     sf::Text displayText;
     displayText.setFont(font);
-    displayText.setCharacterSize(15);
-    displayText.setFillColor(sf::Color::Black);
+    displayText.setCharacterSize(20);
+    displayText.setFillColor(sf::Color::White);
 
-    std::string fullText = text + std::to_string(number);
+    if (number == -1) {
+        fullText = text;
+    }
+    else {
+        fullText = text + std::to_string(number);
+    }
     displayText.setString(fullText);
     displayText.setPosition(position);
 

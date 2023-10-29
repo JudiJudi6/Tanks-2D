@@ -14,6 +14,8 @@
 std::vector<Wall> walls;
 std::vector<Brick> bricks;
 std::vector<Box> boxes;
+std::vector<Tank> enemyTanks;
+std::vector<Bullet> enemyBullets;
 
 
 int generateRandomNumber(int min, int max) {

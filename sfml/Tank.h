@@ -17,10 +17,9 @@ private:
     int newDirection = std::rand() % 4;
     int newDirectionChangeTime = std::rand() % 3000 + 500;
     sf::Vector2f previousPosition;
-    bool isRidingInWallLeft = false;
-    bool isRidingInWallRight = false;
-    bool isRidingInWallTop = false;
-    bool isRidingInWallBottom = false;
+    bool killed;
+    sf::Time killedTime;
+    bool respawn = false;
 
 public:
     Tank(sf::Vector2f position, float speed, const std::string& texturePath, const std::string& texturePathHitted);
@@ -49,6 +48,7 @@ public:
     void enemyIntelligence(Tank& playerTank, Bullet& enemyBullet, sf::Clock& clock);
     bool castRays(const sf::Vector2f& newPosition);
     bool isWallBetweenTanks(const Tank& playerTank);
+    void respawnEnemy();
 }; 
 
 #undef TANK_H
