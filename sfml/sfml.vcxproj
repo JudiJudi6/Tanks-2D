@@ -133,6 +133,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="BonusEvent.cpp" />
     <ClCompile Include="Box.cpp" />
     <ClCompile Include="BoxesInGame.cpp" />
     <ClCompile Include="Brick.cpp" />
@@ -151,6 +152,7 @@
     <ClCompile Include="WallsInGame.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="BonusEvent.h" />
     <ClInclude Include="Box.h" />
     <ClInclude Include="BoxesInGame.h" />
     <ClInclude Include="Brick.h" />

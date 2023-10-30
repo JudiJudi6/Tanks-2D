@@ -8,7 +8,7 @@ private:
 public:
 	sf::RectangleShape bodyIncrease;
 	sf::RectangleShape bodyDecrease;
-	int tanksInGame = 1;
+	int tanksInGame = 3;
 	TanksInGame(sf::Vector2f position);
 	void IncreaseValue();
 	void DecreaseValue();

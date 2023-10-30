@@ -1,4 +1,6 @@
 #include "Box.h"
+#include "BonusEvent.h"
+#include "enemyIntelligence.h"
 #include <iostream>
 
 
@@ -22,7 +24,10 @@ void Box::GetHitted(Bullet& bullet) {
 
     if (boxBounds.intersects(bulletBounds)) {
         body.setPosition(sf::Vector2f(2000, 2000));
-        std::cout << "box";
         bullet.setActive(false);
+        
+        bonusEvents.push_back(BonusEvent(1, sf::Vector2f(100,100))); // to laguje
+
+        std::cout << bonusEvents.size();
     }
 }

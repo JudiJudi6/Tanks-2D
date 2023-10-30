@@ -24,10 +24,11 @@ private:
 public:
     Tank(sf::Vector2f position, float speed, const std::string& texturePath, const std::string& texturePathHitted);
     sf::RectangleShape body;
-    sf::Vector2f direction;
+    sf::Vector2f direction = sf::Vector2f(10.0f, 0);
     int healthPoints;
     float speed;
     bool stopped;
+    int damagePerShot = 100;
 
     void moveLeft();
     void moveRight();
@@ -49,6 +50,12 @@ public:
     bool castRays(const sf::Vector2f& newPosition);
     bool isWallBetweenTanks(const Tank& playerTank);
     void respawnEnemy();
+    void eventBonusIntersects();
+
+    void setDamage(int dmg);
+    int getDamage();
+    void setSpeed(float speed);
+    int getSpeed();
 }; 
 
 #undef TANK_H

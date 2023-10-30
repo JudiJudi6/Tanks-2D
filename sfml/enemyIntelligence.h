@@ -8,6 +8,7 @@
 #include "Brick.h"
 #include "Box.h"
 #include <cstdlib>
+#include "BonusEvent.h"
 #include <ctime>
 
 extern std::vector<Wall> walls;
@@ -16,6 +17,8 @@ extern std::vector<Box> boxes;
 extern std::vector<Tank> enemyTanks;
 extern std::vector<Bullet> enemyBullets;
 extern std::vector<sf::Vector2f> availablePlace;
+extern std::vector<BonusEvent> bonusEvents;
+
 /*
 extern sf::Vector2f oldEnemyPosition;
 //extern int newDirection;

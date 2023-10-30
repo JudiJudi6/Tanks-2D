@@ -3,12 +3,13 @@
 #include "StatsWindow.h"
 #include "enemyIntelligence.h"
 #include "renderHelpers.h"
+#include "BonusEvent.h"
 #include <iostream>
 #include "PlayerTank.h"
 
 Tank::Tank(sf::Vector2f position, float speed, const std::string& texturePath, const std::string& texturePathHitted) {
     this->speed = speed;
-    this->body.setSize(sf::Vector2f(50, 50));
+    this->body.setSize(sf::Vector2f(45, 45));
     this->body.setPosition(position);
     this->stopped = false;
 
@@ -20,7 +21,7 @@ Tank::Tank(sf::Vector2f position, float speed, const std::string& texturePath, c
         std::cout << "B³¹d ³adowania tekstury: " << texturePathHitted << std::endl;
     }
 
-    this->body.setOrigin(sf::Vector2f(25, 25));
+    this->body.setOrigin(sf::Vector2f(22.5, 22.5));
 
 
     this->healthPoints = 300;
@@ -240,21 +241,21 @@ void Tank::enemyIntelligence(Tank& playerTank, Bullet& enemyBullet, sf::Clock& c
             if (std::abs(deltaY) < 22) {
                 if (deltaX < 0) {
                     moveRight();
-                    enemyBullet.shot(getBulletDirection(), body.getPosition().x, body.getPosition().y);
+                    enemyBullet.shot(getBulletDirection(), body.getPosition().x, body.getPosition().y, getDamage());
                 }
                 else {
                     moveLeft();
-                    enemyBullet.shot(getBulletDirection(), body.getPosition().x, body.getPosition().y);
+                    enemyBullet.shot(getBulletDirection(), body.getPosition().x, body.getPosition().y, getDamage());
                 }
             }
             if (std::abs(deltaX) < 22) {
                 if (deltaY < 0) {
                     moveBottom();
-                    enemyBullet.shot(getBulletDirection(), body.getPosition().x, body.getPosition().y);
+                    enemyBullet.shot(getBulletDirection(), body.getPosition().x, body.getPosition().y, getDamage());
                 }
                 else {
                     moveTop();
-                    enemyBullet.shot(getBulletDirection(), body.getPosition().x, body.getPosition().y);
+                    enemyBullet.shot(getBulletDirection(), body.getPosition().x, body.getPosition().y, getDamage());
                 }
 
             }
@@ -348,8 +349,8 @@ bool Tank::castRays(const sf::Vector2f& newPosition) {
     sf::FloatRect tankBounds = body.getGlobalBounds();
     sf::RectangleShape shape;
     shape.setPosition(body.getPosition().x, body.getPosition().y);
-    shape.setSize(sf::Vector2f(50, 50));
-    shape.setOrigin(25, 25);
+    shape.setSize(sf::Vector2f(45, 45));
+    shape.setOrigin(22.5, 22.5);
     shape.move(newPosition);
     
     
@@ -387,4 +388,32 @@ bool Tank::castRays(const sf::Vector2f& newPosition) {
     }
 
     return false; // Brak kolizji
+}
+
+void Tank::eventBonusIntersects() {
+    for (BonusEvent& bonusEvent : bonusEvents) {
+        sf::FloatRect tankBounds = body.getGlobalBounds();
+        sf::FloatRect bonusBounds = bonusEvent.body.getGlobalBounds();
+
+        // SprawdŸ, czy wystêpuje kolizja
+        if (tankBounds.intersects(bonusBounds)) {
+            bonusEvent.action(*this);
+        }
+    }
+}
+
+void Tank::setDamage(int dmg) {
+    this->damagePerShot = dmg;
+}
+
+int Tank::getDamage() {
+    return this->damagePerShot;
+}
+
+void Tank::setSpeed(float speed) {
+    this->speed = speed;
+}
+
+int Tank::getSpeed() {
+    return this->speed;
 }

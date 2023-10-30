@@ -17,6 +17,7 @@ std::vector<Box> boxes;
 std::vector<Tank> enemyTanks;
 std::vector<Bullet> enemyBullets;
 std::vector<sf::Vector2f> availablePlace;
+std::vector<BonusEvent> bonusEvents;
 
 
 int generateRandomNumber(int min, int max) {

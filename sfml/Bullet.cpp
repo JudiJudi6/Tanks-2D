@@ -13,8 +13,9 @@ Bullet::Bullet() {
     damage = 100;
 }
 
-void Bullet::shot(sf::Vector2f direction, float x, float y){
+void Bullet::shot(sf::Vector2f direction, float x, float y, int damage){
     this->active = true;
+    this->damage = damage;
 
     if (active) {
         if (shotClock.getElapsedTime().asSeconds() >= 1.0) { 
@@ -56,8 +57,3 @@ void Bullet::drawBullet(sf::RenderWindow& window) {
 int Bullet::getDamage() {
     return damage;
 }
-/*
-sf::FloatRect Bullet::getGlobalBounds(){
-    return body.getGlobalBounds();
-}
-*/

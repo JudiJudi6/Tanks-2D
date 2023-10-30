@@ -27,7 +27,7 @@ void TanksInGame::drawDecrease(sf::RenderWindow &window) {
 }
 
 void TanksInGame::IncreaseValue() {
-    if (tanksInGame < 10) {
+    if (tanksInGame < 20) {
         tanksInGame++;
     }
 }

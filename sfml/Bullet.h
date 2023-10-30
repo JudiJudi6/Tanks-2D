@@ -16,7 +16,7 @@ public:
     bool active;
     sf::RectangleShape body;
 
-    void shot(sf::Vector2f direction, float x, float y);
+    void shot(sf::Vector2f direction, float x, float y, int damage = 100);
     void setActive(bool isActive);
     void drawBullet(sf::RenderWindow& window);
     void updateBullet();

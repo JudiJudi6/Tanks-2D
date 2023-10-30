@@ -13,6 +13,7 @@
 #include "Wall.h"
 #include "Brick.h"
 #include "Box.h"
+#include "BonusEvent.h"
 #include <iostream>
 #include <cstdlib>
 #include <ctime>
@@ -25,47 +26,36 @@ int main()
     sf::RectangleShape panel;
     sf::RectangleShape welcomeScreen;
     sf::RectangleShape battleButton;
+    sf::RectangleShape restartButton;
     bool mouseClicked = false;
     bool renderElements = false;
     bool disableInGameValues = false;
-
     bool startGame = false; 
-   // sf::Texture texture;
-    //texture.loadFromFile("enemy.png");
-    
+    bool displayEndScreen = false;
+
     std::srand(std::time(0));
     sf::Clock clock;
     clock.restart();
 
-    std::vector<int> cordXarr = { 125, 175, 225, 275, 325, 375, 525, 575, 625, 675, 725, 775 };
-    std::vector<int> cordYarr = { 125, 175, 225, 275, 325, 475, 525, 575, 625, 675 };
-
-    for (int i = 0; i < cordXarr.size(); i++) {
-        for (int j = 0; j < cordYarr.size(); j++) {
-            availablePlace.push_back(sf::Vector2f(cordXarr[i], cordYarr[j]));
-        }
-    }
-   // int newDirection = std::rand() % 4;
-    //sf::Clock clock;
-    //clock.restart();
-
-  //  int tanksInGame = 3;
     TanksInGame tanksInGame(sf::Vector2f(600, 350));
     WallsInGame wallsInGame(sf::Vector2f(600, 390));
     BricksInGame bricksInGame(sf::Vector2f(600, 430));
     BoxesInGame boxesInGame(sf::Vector2f(600, 470));
 
-  //  int wallsInGame = 0;
-    //int bricksInGame = 0;
-    //int boxesInGame = 10;
-
-    //stats
-    //sf::Text killsCounter;
-    //int destroyedTanks = 0;
-
+    
     // Gracz
-    Tank playerTank(sf::Vector2f(450, 400), 5.0f, "player.png", "playerHitted.png");
+    Tank playerTank(sf::Vector2f(450, 400), 2.2f, "player.png", "playerHitted.png");
     Bullet playerBullet;
+
+   // BonusEvent health(0, "health.png", sf::Vector2f(100, 100));
+    //BonusEvent dmg(1, "dmg.png", sf::Vector2f(100, 200));
+    //BonusEvent speed(2, "dmg.png", sf::Vector2f(100,300));
+
+   // bonusEvents.push_back(health);
+    //bonusEvents.push_back(dmg);
+    //bonusEvents.push_back(speed);
+
+
 
    // enemyTanks.push_back(Tank(getRandomCordsForEnemySpawn(), 0.9f, "enemy.png", "enemyHitted.png"));
 
@@ -94,11 +84,15 @@ int main()
     battleButton.setSize(sf::Vector2f(120, 70));
     battleButtonTexture.loadFromFile("battleButton.png");
     battleButton.setTexture(&battleButtonTexture);
-    battleButton.setPosition(405, 500);
+
+    sf::Texture restartButtonTexture;
+    restartButton.setSize(sf::Vector2f(70, 70));
+    restartButtonTexture.loadFromFile("restartButton.png");
+    restartButton.setTexture(&restartButtonTexture);
+   // restartButton.setPosition(405, 500);
 
     //Stats gameStats;
 
-    startGameTime();
 
 
     while (window.isOpen()) {
@@ -121,7 +115,7 @@ int main()
 
         sf::Vector2i mousePosition = sf::Mouse::getPosition(window);
 
-        if (!startGame) {
+      //  if (!startGame) {
             if (evnt.type == sf::Event::MouseButtonPressed && evnt.mouseButton.button == sf::Mouse::Left) {
                 if (!mouseClicked) {
                     sf::Vector2i mousePosition = sf::Mouse::getPosition(window);
@@ -131,8 +125,18 @@ int main()
                         ///std::cout << "dsa";
                         drawText(window, "Loading...", sf::Vector2f(520, 540));
                         window.display();
+
+
+                        std::vector<int> cordXarr = { 125, 175, 225, 275, 325, 375, 525, 575, 625, 675, 725, 775 };
+                        std::vector<int> cordYarr = { 125, 175, 225, 275, 325, 475, 525, 575, 625, 675 };
+
+                        for (int i = 0; i < cordXarr.size(); i++) {
+                            for (int j = 0; j < cordYarr.size(); j++) {
+                                availablePlace.push_back(sf::Vector2f(cordXarr[i], cordYarr[j]));
+                            }
+                        }
                         for (int i = 0; i < tanksInGame.tanksInGame; i++) {
-                            enemyTanks.push_back(Tank(getRandomCordsForEnemySpawn(), 1.5f, "enemy.png", "enemyHitted.png"));
+                            enemyTanks.push_back(Tank(getRandomCordsForEnemySpawn(), 1.4f, "enemy.png", "enemyHitted.png"));
                             enemyBullets.push_back(Bullet());
                             // std::cout << enemyTanks.size();
                         }
@@ -149,6 +153,7 @@ int main()
                             boxes.push_back(Box(getRandomCordsForWalls(), "box.png"));
                         }
                         startGame = true; 
+                        startGameTime();
                     }
 
                     if (mousePosition.x > tanksInGame.bodyIncrease.getGlobalBounds().left && mousePosition.x < tanksInGame.bodyIncrease.getGlobalBounds().left + tanksInGame.bodyIncrease.getGlobalBounds().width
@@ -201,6 +206,23 @@ int main()
                        // std::cout << "2";
                         boxesInGame.DecreaseValue();
                     }
+
+                    if (mousePosition.x > restartButton.getGlobalBounds().left && mousePosition.x < restartButton.getGlobalBounds().left + restartButton.getGlobalBounds().width
+                        && mousePosition.y > restartButton.getGlobalBounds().top && mousePosition.y < restartButton.getGlobalBounds().top + restartButton.getGlobalBounds().height) {
+                        displayEndScreen = false;
+                        startGame = false;
+                        playerTank.setHealthPoints(300);
+                        playerTank.body.setPosition(sf::Vector2f(450, 400));
+                        destroyedTanks = 0;
+                        std::cout << "dsa";
+
+                        walls.clear(); // Wyczyszczenie wektora walls
+                        bricks.clear(); // Wyczyszczenie wektora bricks
+                        boxes.clear(); // Wyczyszczenie wektora boxes
+                        enemyTanks.clear(); // Wyczyszczenie wektora enemyTanks
+                        enemyBullets.clear(); // Wyczyszczenie wektora enemyBullets
+                        availablePlace.clear(); // Wyczyszczenie wektora availablePlace
+                    }
                 }
                 mouseClicked = true;
             }
@@ -209,8 +231,8 @@ int main()
                 mouseClicked = false;
             }
 
-        }
-        else {
+      //  }
+        //else {
             if (sf::Keyboard::isKeyPressed(sf::Keyboard::W)) {
                 playerTank.moveTop();
             }
@@ -224,11 +246,11 @@ int main()
                 playerTank.moveRight();
             }
             if (sf::Keyboard::isKeyPressed(sf::Keyboard::Space)) {
-                playerBullet.shot(playerTank.getBulletDirection(), playerTank.body.getPosition().x, playerTank.body.getPosition().y);
+                playerBullet.shot(playerTank.getBulletDirection(), playerTank.body.getPosition().x, playerTank.body.getPosition().y, playerTank.getDamage());
             }
 
             countGameTime();
-        }
+      // }
 
        
 
@@ -240,17 +262,11 @@ int main()
         window.draw(enemy3Tank.body);
         */
 
-        if (!renderElements) {
-
-            renderElements = true;
-        }
-
 
         if (startGame) {
-
             playerBullet.drawBullet(window);
-          // playerTank.body.setPosition(sf::Vector2f(450, 400));
             window.draw(playerTank.body);
+            playerTank.eventBonusIntersects();
 
             for (int i = 0; i < tanksInGame.tanksInGame; i++) {
                 enemyTanks[i].getHitted(playerBullet);
@@ -261,6 +277,7 @@ int main()
                 enemyTanks[i].drawTank(window);
                 enemyTanks[i].enemyIntelligence(playerTank, enemyBullets[i], clock);
                 enemyTanks[i].respawnEnemy();
+                enemyTanks[i].eventBonusIntersects();
             }
 
             for (int i = 0; i < bricksInGame.bricksInGame; i++) {
@@ -289,9 +306,16 @@ int main()
                 }
                 walls[i].GetHitted(playerBullet);
             }
+
+            for (int i = 0; i < bonusEvents.size(); i++) {
+                std::cout << bonusEvents.size();
+                bonusEvents[i].drawEvent(window);
+            }
         }
         else {
             window.draw(welcomeScreen);
+            restartButton.setPosition(0, 0);
+            battleButton.setPosition(405, 500);
             window.draw(battleButton);
             drawText(window, "Tanks 2D", sf::Vector2f(240, 240));
             drawText(window, "Enemy Tanks in game: " ,sf::Vector2f(260, 320), tanksInGame.tanksInGame);
@@ -315,16 +339,54 @@ int main()
             if (wallsInGame.wallsInGame + bricksInGame.bricksInGame + boxesInGame.boxesInGame > 119) {
                 disableInGameValues = true;
             }
+            else {
+                disableInGameValues = false;
+            }
         }
+
+        if (playerTank.getHealthPoints() <= 0) {
+            //startGame = false;
+            stopGameTime();
+            playerTank.setHealthPoints(0);
+            playerTank.body.setPosition(-2000, -2000);
+           
+          //  playerTank.get
+            displayEndScreen = true;
+        }
+
+        if (displayEndScreen) {
+            window.draw(welcomeScreen);
+            restartButton.setPosition(425, 500);
+            battleButton.setPosition(0, 0);
+            window.draw(restartButton);
+
+            int minutes = gameTime / 60;
+            int seconds = gameTime % 60;
+
+            drawText(window, "Game over", sf::Vector2f(400, 300));
+            drawText(window, "Points: ", sf::Vector2f(350, 340), gameTime + ((destroyedTanks - 1) * 15));
+            drawText(window, "Game time: ", sf::Vector2f(350, 380), minutes);
+            if (seconds < 10) {
+                drawText(window, ": 0", sf::Vector2f(470, 380), seconds);
+            }
+            else {
+                drawText(window, ": ", sf::Vector2f(470, 380), seconds);
+            }
+            drawText(window, "Destroyed enemies: ", sf::Vector2f(350, 420), destroyedTanks - 1);
+
+            drawText(window, "Tanks 2D", sf::Vector2f(240, 240));
+        }
+        
         playerBullet.updateBullet();
         playerTank.getHittedAnimation();
         window.draw(panel);
-        
         //draw stats
         //std::cout << destroyedTanks;
         drawText(window, "Kills: ", sf::Vector2f(950, 200), destroyedTanks);
         drawText(window, "Game time: ", sf::Vector2f(950, 300), gameTime);
-        drawText(window, "Player HP: ", sf::Vector2f(950, 400), playerTank.getHealthPoints());
+        drawText(window, "Hit points: ", sf::Vector2f(950, 400), playerTank.getHealthPoints());
+        drawText(window, "Damage: ", sf::Vector2f(950, 500), playerTank.getDamage());
+        drawText(window, "Speed: ", sf::Vector2f(950, 600), playerTank.getSpeed());
 
 
         //addKill();
