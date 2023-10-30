@@ -1,4 +1,5 @@
 #include "renderHelpers.h"
+#include "enemyIntelligence.h"
 #include <iostream>
 #include <cstdlib>
 #include <ctime>
@@ -22,27 +23,28 @@ sf::Vector2f getRandomCordsForEnemySpawn() {
 }
 
 sf::Vector2f getRandomCordsForWalls() {
-    static std::vector<int> cordXarr = { 125, 175, 225, 275, 325, 375, 525, 575, 625, 675, 725, 775 };
-    static std::vector<int> cordYarr = { 125, 175, 225, 275, 325, 475, 525, 575, 625, 675 };
 
-    static std::vector<int> availableX = cordXarr;
-    static std::vector<int> availableY = cordYarr;
 
-    int x, y;
-
+    //int x, y;
+    /*
     if (availableX.empty() || availableY.empty()) {
         // Resetuj dostêpne wartoœci, jeœli wszystkie zosta³y u¿yte
         availableX = cordXarr;
         availableY = cordYarr;
     }
+    */
+    sf::Vector2f randomCords = availablePlace[rand() % availablePlace.size()];
 
-    x = availableX[rand() % availableX.size()];
-    y = availableY[rand() % availableY.size()];
+    auto it = std::find(availablePlace.begin(), availablePlace.end(), randomCords);
 
-    // Usuñ wybrane wartoœci z puli dostêpnych
-    availableX.erase(std::remove(availableX.begin(), availableX.end(), x), availableX.end());
-    availableY.erase(std::remove(availableY.begin(), availableY.end(), y), availableY.end());
+    if (it != availablePlace.end()) {
+        availablePlace.erase(it);
+    }
 
-    return sf::Vector2f(x, y);
+    if (availablePlace.size() == 0) {
+        std::cout << "nie";
+    }
+
+    return randomCords;
 }
 

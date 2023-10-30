@@ -15,7 +15,7 @@ extern std::vector<Brick> bricks;
 extern std::vector<Box> boxes;
 extern std::vector<Tank> enemyTanks;
 extern std::vector<Bullet> enemyBullets;
-
+extern std::vector<sf::Vector2f> availablePlace;
 /*
 extern sf::Vector2f oldEnemyPosition;
 //extern int newDirection;
