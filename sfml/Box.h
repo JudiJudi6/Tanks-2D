@@ -4,13 +4,10 @@
 #pragma once
 class Box
 {
-private:
-	sf::Texture wallTexture;
 public:
 	sf::RectangleShape body;
 
-	Box(sf::Vector2f position, const std::string& textureWallPath);
-	void SetWallTexture();
+	Box(sf::Vector2f position);
 	void GetHitted(Bullet& bullet);
 };
 

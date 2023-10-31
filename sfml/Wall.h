@@ -5,13 +5,11 @@
 class Wall
 {
 private:
-	sf::Texture wallTexture;
 
 public:
 	sf::RectangleShape body;
 
-	Wall(sf::Vector2f position, const std::string& textureWallPath);
-	void SetWallTexture();
+	Wall(sf::Vector2f position);
 	void GetHitted(Bullet& bullet);
 };
 

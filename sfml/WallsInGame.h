@@ -15,8 +15,5 @@ public:
 	void drawIncrease(sf::RenderWindow& window);
 	void drawDecrease(sf::RenderWindow& window);
 	void SetTexture();
-
-
-
 };
 

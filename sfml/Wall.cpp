@@ -2,32 +2,21 @@
 #include <SFML/Graphics.hpp>
 #include <iostream>
 #include "Bullet.h"
+#include "enemyIntelligence.h"
 
-Wall::Wall(sf::Vector2f position, const std::string& textureWallPath) {
+Wall::Wall(sf::Vector2f position) {
     this->body.setSize(sf::Vector2f(50, 50));
     this->body.setPosition(position);
 
-    if (!wallTexture.loadFromFile(textureWallPath)) {
-        std::cout << "B³¹d ³adowania tekstury: " << textureWallPath << std::endl;
-    }
-   // body.setTexture(&wallTexture);
+    body.setTexture(&wallTexture);
 
     this->body.setOrigin(sf::Vector2f(25, 25));
-}
-
-void Wall::SetWallTexture() {
-    this->body.setTexture(&wallTexture);
 }
 
 void Wall::GetHitted(Bullet &bullet) {
     sf::FloatRect wallBounds = body.getGlobalBounds();
     sf::FloatRect bulletBounds = bullet.body.getGlobalBounds();
-    //addKill();
-    // kolizja
     if (wallBounds.intersects(bulletBounds)) {
-        // std::cout << "hitted";
-         //std::cout << playerBullet.getDamage();
-       
        bullet.setActive(false);
     }
 }

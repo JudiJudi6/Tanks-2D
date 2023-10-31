@@ -5,8 +5,6 @@ Bullet::Bullet() {
     body.setSize(sf::Vector2f(10, 5));
     texture.loadFromFile("bullet.png");
     body.setOrigin(sf::Vector2f(5, 2.5));
-
-   // body.setTexture(&texture);
     active = false;
     shotClock.restart();
 

@@ -4,18 +4,13 @@
 #include <iostream>
 
 
-Box::Box(sf::Vector2f position, const std::string& textureWallPath){
+Box::Box(sf::Vector2f position){
     this->body.setSize(sf::Vector2f(50, 50));
     this->body.setPosition(position);
 
-    if (!wallTexture.loadFromFile(textureWallPath)) {
-        std::cout << "B³¹d ³adowania tekstury: " << textureWallPath << std::endl;
-    }
-    this->body.setOrigin(sf::Vector2f(25, 25));
-}
 
-void Box::SetWallTexture() {
-    this->body.setTexture(&wallTexture);
+    this->body.setOrigin(sf::Vector2f(25, 25));
+    this->body.setTexture(&boxTexture);
 }
 
 void Box::GetHitted(Bullet& bullet) {
@@ -23,11 +18,9 @@ void Box::GetHitted(Bullet& bullet) {
     sf::FloatRect bulletBounds = bullet.body.getGlobalBounds();
 
     if (boxBounds.intersects(bulletBounds)) {
-        body.setPosition(sf::Vector2f(2000, 2000));
         bullet.setActive(false);
-        
-        bonusEvents.push_back(BonusEvent(1, sf::Vector2f(100,100))); // to laguje
-
+        bonusEvents.push_back(BonusEvent(rand() % 4, body.getPosition()));
+        body.setPosition(sf::Vector2f(2000, 2000));
         std::cout << bonusEvents.size();
     }
 }

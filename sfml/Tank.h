@@ -12,23 +12,23 @@ private:
     sf::Clock hitClock;
     sf::Vector2f oldEnemyPosition = sf::Vector2f(0.0f, 0.0f);
     bool isHitted = false;
-    bool initialDirection = false;
-    //int destroyedTanks = 0;
     int newDirection = std::rand() % 4;
     int newDirectionChangeTime = std::rand() % 3000 + 500;
     sf::Vector2f previousPosition;
-    bool killed;
+    bool killed = false;
     sf::Time killedTime;
     bool respawn = false;
+    bool onMine = false;
 
 public:
-    Tank(sf::Vector2f position, float speed, const std::string& texturePath, const std::string& texturePathHitted);
+    Tank(sf::Vector2f position, float speed, int flag);
     sf::RectangleShape body;
     sf::Vector2f direction = sf::Vector2f(10.0f, 0);
     int healthPoints;
     float speed;
     bool stopped;
     int damagePerShot = 100;
+    int mines = 3;
 
     void moveLeft();
     void moveRight();
@@ -51,11 +51,16 @@ public:
     bool isWallBetweenTanks(const Tank& playerTank);
     void respawnEnemy();
     void eventBonusIntersects();
+    void mineIntersects();
 
     void setDamage(int dmg);
     int getDamage();
     void setSpeed(float speed);
-    int getSpeed();
+    float getSpeed();
+    void setAddMines();
+    void useOneMine();
+    int getMines();
+    void setMines(int mines);
 }; 
 
 #undef TANK_H
