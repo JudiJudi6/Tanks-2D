@@ -1,5 +1,5 @@
 #include <SFML/Graphics.hpp>
-#include "enemyIntelligence.h"
+#include "globals.h"
 #include "Mine.h"
 
 Mine::Mine(sf::Vector2f position) {

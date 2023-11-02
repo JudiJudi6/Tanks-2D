@@ -1,5 +1,5 @@
 #include "renderHelpers.h"
-#include "enemyIntelligence.h"
+#include "globals.h"
 #include <iostream>
 #include <cstdlib>
 #include <ctime>

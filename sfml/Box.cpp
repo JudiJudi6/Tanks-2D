@@ -1,6 +1,6 @@
 #include "Box.h"
 #include "BonusEvent.h"
-#include "enemyIntelligence.h"
+#include "globals.h"
 #include <iostream>
 
 

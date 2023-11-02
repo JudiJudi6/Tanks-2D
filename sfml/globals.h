@@ -1,5 +1,5 @@
-#ifndef ENEMYINTELLIGENCE
-#define ENEMYINTELLIGENCE
+#ifndef globals
+#define globals
 #pragma once
 
 #include <SFML/Graphics.hpp>

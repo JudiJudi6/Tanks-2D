@@ -1,7 +1,7 @@
 #include "Tank.h"
 #include "Bullet.h"
 #include "StatsWindow.h"
-#include "enemyIntelligence.h"
+#include "globals.h"
 #include "renderHelpers.h"
 #include "BonusEvent.h"
 #include "Mine.h"

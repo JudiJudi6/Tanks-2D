@@ -1,5 +1,5 @@
 #include <SFML/Graphics.hpp>
-#include "enemyIntelligence.h"
+#include "globals.h"
 #include "Tank.h"
 #include "Bullet.h"
 #include <iostream>

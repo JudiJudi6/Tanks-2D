@@ -2,7 +2,7 @@
 #include <SFML/Graphics.hpp>
 #include <iostream>
 #include "Bullet.h"
-#include "enemyIntelligence.h"
+#include "globals.h"
 
 Wall::Wall(sf::Vector2f position) {
     this->body.setSize(sf::Vector2f(50, 50));

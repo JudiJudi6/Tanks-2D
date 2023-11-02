@@ -5,7 +5,7 @@
 #include "playerTank.h"
 #include "StatsWindow.h"
 #include "renderHelpers.h"
-#include "enemyIntelligence.h"
+#include "globals.h"
 #include "TanksInGame.h"
 #include "WallsInGame.h"
 #include "BricksInGame.h"

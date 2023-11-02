@@ -1,5 +1,5 @@
 #include "BonusEvent.h"
-#include "enemyIntelligence.h"
+#include "globals.h"
 #include <iostream>
 
 BonusEvent::BonusEvent(int flag, sf::Vector2f position) {

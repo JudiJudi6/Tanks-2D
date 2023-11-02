@@ -139,7 +139,7 @@
     <ClCompile Include="Brick.cpp" />
     <ClCompile Include="BricksInGame.cpp" />
     <ClCompile Include="Bullet.cpp" />
-    <ClCompile Include="enemyIntelligence.cpp" />
+    <ClCompile Include="globals.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Mine.cpp" />
     <ClCompile Include="renderHelpers.cpp" />
@@ -157,7 +157,7 @@
     <ClInclude Include="Brick.h" />
     <ClInclude Include="BricksInGame.h" />
     <ClInclude Include="Bullet.h" />
-    <ClInclude Include="enemyIntelligence.h" />
+    <ClInclude Include="globals.h" />
     <ClInclude Include="Mine.h" />
     <ClInclude Include="renderHelpers.h" />
     <ClInclude Include="SettingsArrow.h" />

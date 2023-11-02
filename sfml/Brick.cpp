@@ -1,6 +1,6 @@
 #include "Brick.h"
 #include "Wall.h"
-#include "enemyIntelligence.h"
+#include "globals.h"
 #include <SFML/Graphics.hpp>
 #include <iostream>
 #include "Bullet.h"
