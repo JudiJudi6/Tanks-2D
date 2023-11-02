@@ -10,6 +10,7 @@
 #include "WallsInGame.h"
 #include "BricksInGame.h"
 #include "BoxesInGame.h"
+#include "GameSpeed.h"
 #include "Wall.h"
 #include "Brick.h"
 #include "Box.h"
@@ -43,6 +44,7 @@ int main()
     WallsInGame wallsInGame(sf::Vector2f(600, 390));
     BricksInGame bricksInGame(sf::Vector2f(600, 430));
     BoxesInGame boxesInGame(sf::Vector2f(600, 470));
+    GameSpeed gameSpeed(sf::Vector2f(600, 310));
 
     texture1.loadFromFile("health.png");
     texture2.loadFromFile("dmg.png");
@@ -58,7 +60,7 @@ int main()
     enemyTextureHitted.loadFromFile("enemyHitted.png");
 
     // player
-    Tank playerTank(sf::Vector2f(450, 400), 3.0f, 1);
+    Tank playerTank(sf::Vector2f(450, 400), 1.4f * gameSpeed.getGameSpeed(), 1);
     Bullet playerBullet;
 
     sf::Texture mapTexture;
@@ -120,7 +122,7 @@ int main()
                         }
                     }
                     for (int i = 0; i < tanksInGame.tanksInGame; i++) {
-                        enemyTanks.push_back(Tank(getRandomCordsForEnemySpawn(), 2.0f, 0));
+                        enemyTanks.push_back(Tank(getRandomCordsForEnemySpawn(), 1.0f * gameSpeed.getGameSpeed(), 0));
                         enemyBullets.push_back(Bullet());
                     }
 
@@ -199,6 +201,18 @@ int main()
                     availablePlace.clear(); 
                     bonusEvents.clear();
                     minesOnMap.clear();
+                }
+
+                if (mousePosition.x > gameSpeed.bodyDecrease.getGlobalBounds().left && mousePosition.x < gameSpeed.bodyDecrease.getGlobalBounds().left + gameSpeed.bodyDecrease.getGlobalBounds().width
+                    && mousePosition.y > gameSpeed.bodyDecrease.getGlobalBounds().top && mousePosition.y < gameSpeed.bodyDecrease.getGlobalBounds().top + gameSpeed.bodyDecrease.getGlobalBounds().height) {
+                    gameSpeed.DecreaseValue();
+                }
+
+                if (mousePosition.x > gameSpeed.bodyIncrease.getGlobalBounds().left && mousePosition.x < gameSpeed.bodyIncrease.getGlobalBounds().left + gameSpeed.bodyIncrease.getGlobalBounds().width
+                    && mousePosition.y > gameSpeed.bodyIncrease.getGlobalBounds().top && mousePosition.y < gameSpeed.bodyIncrease.getGlobalBounds().top + gameSpeed.bodyIncrease.getGlobalBounds().height) {
+                   // if (!disableInGameValues) {
+                        gameSpeed.IncreaseValue();
+                    //}
                 }
             }
             mouseClicked = true;
@@ -296,11 +310,14 @@ int main()
             battleButton.setPosition(405, 500);
             window.draw(battleButton);
             drawText(window, "Tanks 2D", sf::Vector2f(240, 240));
+            drawTextFloat(window, "Game speed: ", sf::Vector2f(260, 280), gameSpeed.gameSpeed);
             drawText(window, "Enemy Tanks in game: " ,sf::Vector2f(260, 320), tanksInGame.tanksInGame);
             drawText(window, "Walls in game: ", sf::Vector2f(260, 360), wallsInGame.wallsInGame);
             drawText(window, "Bricks in Game: ", sf::Vector2f(260, 400), bricksInGame.bricksInGame);
             drawText(window, "Boxes in Game: ", sf::Vector2f(260, 440), boxesInGame.boxesInGame);
 
+            gameSpeed.drawIncrease(window);
+            gameSpeed.drawDecrease(window);
             tanksInGame.drawIncrease(window);
             tanksInGame.drawDecrease(window);
             wallsInGame.drawIncrease(window);
@@ -326,7 +343,7 @@ int main()
             stopGameTime();
             playerTank.setHealthPoints(0);
             playerTank.setDamage(100);
-            playerTank.setSpeed(3.0);
+            playerTank.setSpeed(1.0f * gameSpeed.getGameSpeed());
             playerTank.setMines(3);
             playerTank.body.setPosition(-2000, -2000);
            

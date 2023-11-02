@@ -1,5 +1,6 @@
 #include <SFML/Graphics.hpp>
 #pragma once
+/*
 class SettingsArrow
 {
 private:
@@ -12,3 +13,5 @@ public:
 	void DecreaseValue();
 };
 
+
+*/

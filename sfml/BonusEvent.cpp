@@ -44,7 +44,6 @@ void BonusEvent::action(Tank &tank) {
 	if (flag == 2) {
 		tank.setSpeed(tank.getSpeed() + 0.2);
 		body.setPosition(-100, -200);
-		std::cout << tank.getSpeed();
 	}
 
 	//bomb

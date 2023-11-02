@@ -1,6 +1,7 @@
 #include <SFML/Graphics.hpp>
 #include "StatsWindow.h"
 #include <iostream>
+#include <cmath>
 
 int destroyedTanks = 0;
 int gameTime = 0;
@@ -21,6 +22,27 @@ void drawText(sf::RenderWindow& window, const std::string& text, const sf::Vecto
     }
     else {
         fullText = text + std::to_string(number);
+    }
+    displayText.setString(fullText);
+    displayText.setPosition(position);
+
+    window.draw(displayText);
+}
+
+void drawTextFloat(sf::RenderWindow& window, const std::string& text, const sf::Vector2f& position, float number) {
+    sf::Font font;
+    font.loadFromFile("roboto.ttf");
+    std::string fullText;
+    sf::Text displayText;
+    displayText.setFont(font);
+    displayText.setCharacterSize(20);
+    displayText.setFillColor(sf::Color::White);
+
+    if (number == -1) {
+        fullText = text;
+    }
+    else {
+        fullText = text + std::to_string(std::round(number * 10) / 10);
     }
     displayText.setString(fullText);
     displayText.setPosition(position);

@@ -10,6 +10,7 @@ extern sf::Clock gameTimeClock;
 
 void addKill();
 void drawText(sf::RenderWindow& window, const std::string& text, const sf::Vector2f& position, int number = -1);
+void drawTextFloat(sf::RenderWindow& window, const std::string& text, const sf::Vector2f& position, float number = -1);
 void startGameTime();
 void countGameTime();
 void stopGameTime();

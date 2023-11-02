@@ -29,7 +29,7 @@ Tank::Tank(sf::Vector2f position, float speed, int flag) {
 
 void Tank::moveLeft() {
     sf::Vector2f position = body.getPosition();
-    direction = sf::Vector2f(-15.0f, 0);
+    direction = sf::Vector2f(-5.0f * speed, 0);
 
     body.setRotation(180);
 
@@ -49,7 +49,7 @@ void Tank::moveLeft() {
 
 void Tank::moveRight() {
     sf::Vector2f position = body.getPosition();
-    direction = sf::Vector2f(15.0f, 0);
+    direction = sf::Vector2f(5.0f * speed, 0);
 
     body.setRotation(0);
 
@@ -69,7 +69,7 @@ void Tank::moveRight() {
 
 void Tank::moveTop() {
     sf::Vector2f position = body.getPosition();
-    direction = sf::Vector2f(0, -15.0f);
+    direction = sf::Vector2f(0, -5.0f * speed);
 
     body.setRotation(-90);
 
@@ -89,7 +89,7 @@ void Tank::moveTop() {
 
 void Tank::moveBottom() {
     sf::Vector2f position = body.getPosition();
-    direction = sf::Vector2f(0, 15.0f);
+    direction = sf::Vector2f(0, 5.0f * speed);
     body.setRotation(90);
 
     if (!castRays(sf::Vector2f(0, 5.0f))) { 

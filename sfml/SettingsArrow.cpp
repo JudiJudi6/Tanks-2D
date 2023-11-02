@@ -1,6 +1,6 @@
 #include <SFML/Graphics.hpp>
 #include "SettingsArrow.h"
-
+/*
 SettingsArrow::SettingsArrow(int rotate, sf::Vector2f position, const std::string& texturePath, int &value) {
     sf::Texture arrowTexture;
     body.setSize(sf::Vector2f(20, 20));
@@ -19,3 +19,4 @@ void SettingsArrow::IncreaseValue() {
 void SettingsArrow::DecreaseValue() {
     arrowValue--;
 }
+*/
