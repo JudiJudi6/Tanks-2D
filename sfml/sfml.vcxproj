@@ -135,39 +135,27 @@
   <ItemGroup>
     <ClCompile Include="BonusEvent.cpp" />
     <ClCompile Include="Box.cpp" />
-    <ClCompile Include="BoxesInGame.cpp" />
     <ClCompile Include="Brick.cpp" />
-    <ClCompile Include="BricksInGame.cpp" />
     <ClCompile Include="Bullet.cpp" />
-    <ClCompile Include="GameSpeed.cpp" />
-    <ClCompile Include="globals.cpp" />
+    <ClCompile Include="Game.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Mine.cpp" />
     <ClCompile Include="renderHelpers.cpp" />
-    <ClCompile Include="SettingsArrow.cpp" />
     <ClCompile Include="StatsWindow.cpp" />
     <ClCompile Include="Tank.cpp" />
-    <ClCompile Include="TanksInGame.cpp" />
     <ClCompile Include="Wall.cpp" />
-    <ClCompile Include="WallsInGame.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="BonusEvent.h" />
     <ClInclude Include="Box.h" />
-    <ClInclude Include="BoxesInGame.h" />
     <ClInclude Include="Brick.h" />
-    <ClInclude Include="BricksInGame.h" />
     <ClInclude Include="Bullet.h" />
-    <ClInclude Include="GameSpeed.h" />
-    <ClInclude Include="globals.h" />
+    <ClInclude Include="Game.h" />
     <ClInclude Include="Mine.h" />
     <ClInclude Include="renderHelpers.h" />
-    <ClInclude Include="SettingsArrow.h" />
     <ClInclude Include="StatsWindow.h" />
     <ClInclude Include="Tank.h" />
-    <ClInclude Include="TanksInGame.h" />
     <ClInclude Include="Wall.h" />
-    <ClInclude Include="WallsInGame.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

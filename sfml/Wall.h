@@ -5,7 +5,6 @@
 class Wall
 {
 private:
-
 public:
 	sf::RectangleShape body;
 

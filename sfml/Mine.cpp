@@ -1,5 +1,6 @@
 #include <SFML/Graphics.hpp>
 #include "globals.h"
+#include "renderHelpers.h"
 #include "Mine.h"
 
 Mine::Mine(sf::Vector2f position) {

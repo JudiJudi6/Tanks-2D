@@ -1,5 +1,6 @@
 #include "Box.h"
 #include "BonusEvent.h"
+#include "renderHelpers.h"
 #include "globals.h"
 #include <iostream>
 

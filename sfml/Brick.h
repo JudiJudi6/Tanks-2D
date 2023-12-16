@@ -4,6 +4,7 @@
 #pragma once
 class Brick 
 {
+private:
 public:
 	sf::RectangleShape body;
 

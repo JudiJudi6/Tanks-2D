@@ -4,6 +4,7 @@
 #pragma once
 class Box
 {
+private:
 public:
 	sf::RectangleShape body;
 

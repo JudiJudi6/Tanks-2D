@@ -1,6 +1,7 @@
 #include "Wall.h"
 #include <SFML/Graphics.hpp>
 #include <iostream>
+#include "renderHelpers.h"
 #include "Bullet.h"
 #include "globals.h"
 

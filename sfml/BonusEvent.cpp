@@ -1,5 +1,6 @@
 #include "BonusEvent.h"
 #include "globals.h"
+#include "renderHelpers.h"
 #include <iostream>
 
 BonusEvent::BonusEvent(int flag, sf::Vector2f position) {

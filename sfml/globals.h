@@ -1,3 +1,5 @@
+
+/*
 #ifndef globals
 #define globals
 #pragma once
@@ -11,6 +13,8 @@
 #include "BonusEvent.h"
 #include "Mine.h"
 #include <ctime>
+
+
 
 extern std::vector<Wall> walls;
 extern std::vector<Brick> bricks;
@@ -33,5 +37,21 @@ extern sf::Texture playerTexture;
 extern sf::Texture playerTextureHitted;
 extern sf::Texture enemyTexture;
 extern sf::Texture enemyTextureHitted;
+extern sf::Texture mapTexture;
+extern sf::Texture panelTexture;
+extern sf::Texture welcomeScreenTexture;
+extern sf::Texture battleButtonTexture;
+extern sf::Texture restartButtonTexture;
+extern sf::Texture addIconTexture;
+extern sf::Texture minusIconTexture;
+
+extern sf::RectangleShape map;
+extern sf::RectangleShape panel;
+extern sf::RectangleShape welcomeScreen;
+extern sf::RectangleShape battleButton;
+extern sf::RectangleShape restartButton;
+
+void loadTextures();
 
 #endif
+*/

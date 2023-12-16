@@ -7,6 +7,7 @@
 #include <ctime>
 #include <random>
 #include <chrono>
+/*
 #include "Wall.h"
 #include "Brick.h"	
 #include "Box.h"
@@ -33,9 +34,65 @@ sf::Texture playerTexture;
 sf::Texture playerTextureHitted;
 sf::Texture enemyTexture;
 sf::Texture enemyTextureHitted;
+sf::Texture mapTexture;
+sf::Texture panelTexture;
+sf::Texture welcomeScreenTexture;
+sf::Texture battleButtonTexture;
+sf::Texture restartButtonTexture;
+sf::Texture addIconTexture;
+sf::Texture minusIconTexture;
+
+sf::RectangleShape map;
+sf::RectangleShape panel;
+sf::RectangleShape welcomeScreen;
+sf::RectangleShape battleButton;
+sf::RectangleShape restartButton;
+sf::RectangleShape minusIcon;
+sf::RectangleShape addIcon;
 
 
 int generateRandomNumber(int min, int max) {
 	int number = std::rand() % max + min;
 	return number;
 }
+
+void loadTextures() {
+    texture1.loadFromFile("health.png");
+    texture2.loadFromFile("dmg.png");
+    texture3.loadFromFile("speed.png");
+    texture4.loadFromFile("bombAdd.png");
+    boxTexture.loadFromFile("box.png");
+    brickTexture.loadFromFile("bricks.png");
+    wallTexture.loadFromFile("wall.png");
+    bomb.loadFromFile("bomb.png");
+    playerTexture.loadFromFile("player.png");
+    playerTextureHitted.loadFromFile("playerHitted.png");
+    enemyTexture.loadFromFile("enemy.png");
+    enemyTextureHitted.loadFromFile("enemyHitted.png");
+    mapTexture.loadFromFile("map.jpg");
+    panelTexture.loadFromFile("panel.png");
+    welcomeScreenTexture.loadFromFile("welcomeScreen.png");
+    battleButtonTexture.loadFromFile("battleButton.png");
+    restartButtonTexture.loadFromFile("restartButton.png");
+    minusIconTexture.loadFromFile("minus.jpg");
+    addIconTexture.loadFromFile("plus.jpg");
+
+
+    map.setSize(sf::Vector2f(900, 800));
+    map.setTexture(&mapTexture);
+
+    panel.setSize(sf::Vector2f(200, 800));
+    panel.setTexture(&panelTexture);
+    panel.setPosition(900, 0);
+
+    welcomeScreen.setSize(sf::Vector2f(500, 400));
+    welcomeScreen.setTexture(&welcomeScreenTexture);
+    welcomeScreen.setPosition(200, 200);
+
+    battleButton.setSize(sf::Vector2f(120, 70));
+    battleButton.setTexture(&battleButtonTexture);
+
+    restartButton.setSize(sf::Vector2f(70, 70));
+    restartButton.setTexture(&restartButtonTexture);
+}
+*/

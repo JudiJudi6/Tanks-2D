@@ -1,6 +1,7 @@
 #include "Brick.h"
 #include "Wall.h"
 #include "globals.h"
+#include "renderHelpers.h"
 #include <SFML/Graphics.hpp>
 #include <iostream>
 #include "Bullet.h"
