@@ -4,7 +4,6 @@
 
 #include <SFML/Graphics.hpp>
 #include "Bullet.h"
-#include "PlayerTank.h"
 class Tank {
 private:
     sf::Texture texture;

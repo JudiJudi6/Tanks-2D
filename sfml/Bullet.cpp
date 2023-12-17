@@ -1,5 +1,4 @@
  #include "Bullet.h"
-#include <iostream>
 
 Bullet::Bullet() {
     body.setSize(sf::Vector2f(10, 5));

@@ -1,7 +1,6 @@
 #include <SFML/Graphics.hpp>
 #include "StatsWindow.h"
 #include <iostream>
-#include <cmath>
 
 int destroyedTanks = 0;
 int gameTime = 0;

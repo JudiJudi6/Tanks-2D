@@ -1,14 +1,12 @@
 #include <SFML/Graphics.hpp>
 #include "Bullet.h"
+#include "Wall.h"
 
 #pragma once
-class Box
+class Box: public Wall
 {
-private:
 public:
-	sf::RectangleShape body;
-
-	Box(sf::Vector2f position);
+	Box(sf::Vector2f position, sf::Texture* texture);
 	void GetHitted(Bullet& bullet);
 };
 

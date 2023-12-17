@@ -1,17 +1,10 @@
 #include "Brick.h"
 #include "Wall.h"
-#include "globals.h"
 #include "renderHelpers.h"
 #include <SFML/Graphics.hpp>
-#include <iostream>
 #include "Bullet.h"
 
-Brick::Brick(sf::Vector2f position) {
-    this->body.setSize(sf::Vector2f(50, 50));
-    this->body.setPosition(position);
-    this->body.setTexture(&brickTexture);
-    this->body.setOrigin(sf::Vector2f(25, 25));
-}
+Brick::Brick(sf::Vector2f position, sf::Texture* texture) : Wall(position, texture) {}
 
 void Brick::GetHitted(Bullet& bullet) {
     sf::FloatRect wallBounds = body.getGlobalBounds();

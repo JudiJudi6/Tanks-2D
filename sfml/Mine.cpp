@@ -1,7 +1,6 @@
 #include <SFML/Graphics.hpp>
-#include "globals.h"
-#include "renderHelpers.h"
 #include "Mine.h"
+#include "renderHelpers.h"
 
 Mine::Mine(sf::Vector2f position) {
     this->body.setSize(sf::Vector2f(25, 25));

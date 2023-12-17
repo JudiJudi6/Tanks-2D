@@ -6,9 +6,8 @@ class Wall
 {
 private:
 public:
-	sf::RectangleShape body;
-
-	Wall(sf::Vector2f position);
+	Wall(sf::Vector2f position, sf::Texture* texture);
 	void GetHitted(Bullet& bullet);
+	sf::RectangleShape body;
 };
 

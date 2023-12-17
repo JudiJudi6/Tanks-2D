@@ -1,21 +1,12 @@
 #include <SFML/Graphics.hpp>
-#include "globals.h"
 #include "Tank.h"
 #include "Bullet.h"
-#include <iostream>
-#include <cstdlib>
-#include <ctime>
-#include <random>
-#include <chrono>
-#include "Wall.h"
 #include "Brick.h"	
 #include "Box.h"
 #include "Mine.h"
 #pragma once
 class Game
 {
-
-
     sf::Texture mapTexture;
     sf::Texture panelTexture;
     sf::Texture welcomeScreenTexture;
@@ -23,12 +14,35 @@ class Game
     sf::Texture restartButtonTexture;
     sf::Texture addIconTexture;
     sf::Texture minusIconTexture;
+    sf::Texture one;
+    sf::Texture two;
+    sf::Texture three;
+    sf::Texture four;
+    sf::Texture five;
+    
+    sf::Texture mapIcon1Texture;
+    sf::Texture mapIcon2Texture;
+    sf::Texture mapIcon3Texture;
+    sf::Texture mapIcon4Texture;
+
 
     sf::RectangleShape map;
     sf::RectangleShape panel;
     sf::RectangleShape welcomeScreen;
     sf::RectangleShape battleButton;
     sf::RectangleShape restartButton;
+
+    sf::RectangleShape oneButton;
+    sf::RectangleShape twoButton;
+    sf::RectangleShape threeButton;
+    sf::RectangleShape fourButton;
+    sf::RectangleShape fiveButton;
+
+    sf::RectangleShape mapIcon1;
+    sf::RectangleShape mapIcon2;
+    sf::RectangleShape mapIcon3;
+    sf::RectangleShape mapIcon4;
+
 
     sf::RectangleShape tanksInGameIncrese;
     sf::RectangleShape tanksInGameDecrease;
@@ -51,6 +65,8 @@ class Game
     bool startGame = false;
     bool displayEndScreen = false;
     bool qKeyPressed = false;
+
+    int mapOption = 0;
 
 	float gameSpeed;
 	int tanksInGame;

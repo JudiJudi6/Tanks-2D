@@ -1,14 +1,12 @@
 #include "Wall.h"
 #include <SFML/Graphics.hpp>
+#include "Wall.h"
 
 #pragma once
-class Brick 
+class Brick: public Wall 
 {
-private:
 public:
-	sf::RectangleShape body;
-
-	Brick(sf::Vector2f position);
+	Brick(sf::Vector2f position, sf::Texture* texture);
 	void GetHitted(Bullet& bullet);
 };
 

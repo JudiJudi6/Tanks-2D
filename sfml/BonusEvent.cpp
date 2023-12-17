@@ -1,7 +1,5 @@
 #include "BonusEvent.h"
-#include "globals.h"
 #include "renderHelpers.h"
-#include <iostream>
 
 BonusEvent::BonusEvent(int flag, sf::Vector2f position) {
 	this->flag = flag;
@@ -51,5 +49,14 @@ void BonusEvent::action(Tank &tank) {
 	if (flag == 3) {
 		tank.setAddMines();
 		body.setPosition(-100, -250);
+	}
+}
+
+void BonusEvent::getDestroyed(Bullet &bullet) {
+	sf::FloatRect wallBounds = body.getGlobalBounds();
+	sf::FloatRect bulletBounds = bullet.body.getGlobalBounds();
+	if (wallBounds.intersects(bulletBounds)) {
+		bullet.setActive(false);
+		body.setPosition(-100, -300);
 	}
 }

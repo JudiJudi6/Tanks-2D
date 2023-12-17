@@ -1,7 +1,5 @@
 #include "renderHelpers.h"
 #include <iostream>
-#include <cstdlib>
-#include <ctime>
 
 std::vector<Wall> walls;
 std::vector<Brick> bricks;
