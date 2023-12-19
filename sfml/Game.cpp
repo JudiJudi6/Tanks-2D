@@ -23,10 +23,10 @@ Game::Game() {
 }
 
 void Game::gameStart() {
-    sf::RenderWindow window(sf::VideoMode(1100, 800), "Tanks 2D", sf::Style::Close);
-    window.setMouseCursorVisible(true);
-    Tank playerTank(sf::Vector2f(450, 400), 1.6f * gameSpeed, 1);
-    Bullet playerBullet;
+    sf::RenderWindow window(sf::VideoMode(1100, 800), "Tanks 2D", sf::Style::Close); //okno 
+    window.setMouseCursorVisible(true); //ustawienie kursora
+    Tank playerTank(sf::Vector2f(450, 400), 1.6f * gameSpeed, 1); //obiekt player tank
+    Bullet playerBullet; //obiekt player bullet
 
 
     std::srand(std::time(0));
@@ -35,7 +35,7 @@ void Game::gameStart() {
 
     while (window.isOpen()) {
         sf::Event evnt;
-        while (window.pollEvent(evnt)) {
+        while (window.pollEvent(evnt)) { //nas³uchiwanie na zamkniêcie okna
             switch (evnt.type)
             {
             case sf::Event::Closed:
@@ -44,9 +44,9 @@ void Game::gameStart() {
             }
         }
 
-        sf::Vector2i mousePosition = sf::Mouse::getPosition(window);
+        sf::Vector2i mousePosition = sf::Mouse::getPosition(window); //œledzenie pozycji myszy
 
-        if (evnt.type == sf::Event::MouseButtonPressed && evnt.mouseButton.button == sf::Mouse::Left) {
+        if (evnt.type == sf::Event::MouseButtonPressed && evnt.mouseButton.button == sf::Mouse::Left) { //obs³uga przycisków
             if (!mouseClicked) {
                 sf::Vector2i mousePosition = sf::Mouse::getPosition(window);
 
@@ -55,74 +55,74 @@ void Game::gameStart() {
                     drawText(window, "Loading...", sf::Vector2f(520, 540));
                     window.display();
                     
-                    if (mapOption == 0) {
-                        std::vector<int> cordXarr = { 125, 175, 225, 275, 325, 375, 525, 575, 625, 675, 725, 775 };
-                        std::vector<int> cordYarr = { 125, 175, 225, 275, 325, 475, 525, 575, 625, 675 };
+                    if (mapOption == 0) { 
+                        std::vector<int> cordXarr = { 125, 175, 225, 275, 325, 375, 525, 575, 625, 675, 725, 775 }; //dostêpne koordynaty
+                        std::vector<int> cordYarr = { 125, 175, 225, 275, 325, 475, 525, 575, 625, 675 }; //dostêpne koordynaty
 
                         for (int i = 0; i < cordXarr.size(); i++) {
                             for (int j = 0; j < cordYarr.size(); j++) {
                                 availablePlace.push_back(sf::Vector2f(cordXarr[i], cordYarr[j]));
                             }
                         }
-                        for (int i = 0; i < tanksInGame; i++) {
+                        for (int i = 0; i < tanksInGame; i++) { //generowanie przeciwników
                             enemyTanks.push_back(Tank(getRandomCordsForEnemySpawn(), 1.0f * gameSpeed, 0));
                             enemyBullets.push_back(Bullet());
                         }
 
-                        for (int i = 0; i < wallsInGame; i++) {
+                        for (int i = 0; i < wallsInGame; i++) { //generowanie œcian
                             walls.push_back(Wall(getRandomCordsForWalls(), &wallTexture));
                         }
 
-                        for (int i = 0; i < bricksInGame; i++) {
+                        for (int i = 0; i < bricksInGame; i++) { //generowanie murów
                             bricks.push_back(Brick(getRandomCordsForWalls(), &brickTexture));
                         }
 
-                        for (int i = 0; i < boxesInGame; i++) {
+                        for (int i = 0; i < boxesInGame; i++) { //generowanie skrzyñ
                             boxes.push_back(Box(getRandomCordsForWalls(), &boxTexture));
                         }
                     }
                     else if (mapOption == 1) {
-                        std::vector<sf::Vector2f> wallCoords = {
+                        std::vector<sf::Vector2f> wallCoords = { //koordynaty œcian
                             {125,125}, {175,125}, {225,125}, {275,125}, {625,125}, {675,125}, {725,125}, {775,125},
                             {125,175}, {775,175}, {125,225}, {775,225}, {125,275}, {275, 275}, {625,275}, {775,275},
                             {125,525}, {275,525}, {625,525}, {775,525}, {125,575}, {775,575},  {125,625}, {775,625},
                             {125,675}, {175,675}, {225,675}, {275,675}, {625,675}, {675,675}, {725,675}, {775,675}
                         };
 
-                        std::vector<sf::Vector2f> brickCoords = {
+                        std::vector<sf::Vector2f> brickCoords = { //koorrdynaty murów
                             {275,175}, {625,175}, {275,225}, {625,225}, {175,275}, {225,275}, {675,275}, {725,275},
                             {175,525}, {225,525}, {675,525}, {725,525}, {275,575}, {625,575}, {275,625}, {625,625}
                         };
 
-                        std::vector<sf::Vector2f> boxCoords = {
+                        std::vector<sf::Vector2f> boxCoords = { //koordynaty skrzyñ
                             {175,175}, {225,175}, {175,225}, {225,225}, {675,175}, {725,175}, {675,225}, {725,225},
                             {175,575}, {225,575}, {175,625}, {225,625}, {675,575}, {725,575}, {675, 625}, {725,625}
                         };
-
-                        tanksInGame = 3;
+                         
+                        tanksInGame = 3; //liczba czo³gów
                         wallsInGame = wallCoords.size();
                         bricksInGame = brickCoords.size();
                         boxesInGame = boxCoords.size();
 
-                        for (const auto& coords : wallCoords) {
+                        for (const auto& coords : wallCoords) { //generowanie œcian
                             walls.push_back(Wall(coords, &wallTexture));
                         }
 
-                        for (const auto& coords : brickCoords) {
+                        for (const auto& coords : brickCoords) { //generowanie murów
                             bricks.push_back(Brick(coords, &brickTexture));
                         }
 
-                        for (const auto& coords : boxCoords) {
+                        for (const auto& coords : boxCoords) { //generowanie skrzyñ
                             boxes.push_back(Box(coords, &boxTexture));
                         }
 
-                        for (int i = 0; i < tanksInGame; i++) {
+                        for (int i = 0; i < tanksInGame; i++) { //generowanie przeciwników
                             enemyTanks.push_back(Tank(getRandomCordsForEnemySpawn(), 1.0f * gameSpeed, 0));
                             enemyBullets.push_back(Bullet());
                         }
                     }
-                    else if (mapOption == 2) {
-                        std::vector<sf::Vector2f> wallCoords = {
+                    else if (mapOption == 2) { 
+                        std::vector<sf::Vector2f> wallCoords = { //koordynaty œcian
                             {125,125}, {175,125}, {225,125}, {275,125}, {325,125}, {375,125}, {525,125}, {575,125}, {625,125}, {675,125}, {725,125}, {775,125},
                             {125,175}, {775,175},
                             {125,225}, {775,225},
@@ -136,7 +136,7 @@ void Game::gameStart() {
                             {125,675}, {175,675}, {225,675}, {275,675}, {325,675}, {375,675}, {525,675}, {575,675}, {625,675}, {675,675}, {725,675}, {775,675},
                         };
 
-                        std::vector<sf::Vector2f> brickCoords = {
+                        std::vector<sf::Vector2f> brickCoords = { //koordynaty murów
                             {325,175}, {575,175},
                             {275,225}, {625,225},
                             {225,275}, {675,275},
@@ -148,7 +148,7 @@ void Game::gameStart() {
                             {325,625}, {575,625},
                         };
 
-                        std::vector<sf::Vector2f> boxCoords = {
+                        std::vector<sf::Vector2f> boxCoords = { //koordynaty skrzyñ
                             {175,175}, {225,175}, {275,175}, {625,175}, {675,175}, {725,175},
                             {175,225}, {225,225}, {675,225}, {725,225},
                             {175,275}, {375,275}, {525,275}, {725,275},
@@ -160,24 +160,24 @@ void Game::gameStart() {
                             {175,625}, {225,625}, {275,625}, {625,625}, {675,625}, {725,625},
                         };
 
-                        tanksInGame = 5;
+                        tanksInGame = 5; //liczba przeciwników
                         wallsInGame = wallCoords.size();
                         bricksInGame = brickCoords.size();
                         boxesInGame = boxCoords.size();
 
-                        for (const auto& coords : wallCoords) {
+                        for (const auto& coords : wallCoords) { //generowanie œcian
                             walls.push_back(Wall(coords, &wallTexture));
                         }
 
-                        for (const auto& coords : brickCoords) {
+                        for (const auto& coords : brickCoords) { //generowanie murów
                             bricks.push_back(Brick(coords, &brickTexture));
                         }
 
-                        for (const auto& coords : boxCoords) {
+                        for (const auto& coords : boxCoords) { //generowanie skrzyñ
                             boxes.push_back(Box(coords, &boxTexture));
                         }
 
-                        for (int i = 0; i < tanksInGame; i++) {
+                        for (int i = 0; i < tanksInGame; i++) { //generowanie przeciwników
                             enemyTanks.push_back(Tank(getRandomCordsForEnemySpawn(), 1.0f * gameSpeed, 0));
                             enemyBullets.push_back(Bullet());
                         }

@@ -59,24 +59,23 @@ class Game
     sf::RectangleShape gameSpeedIncrese;
     sf::RectangleShape gameSpeedDecrease;
 
-    bool mouseClicked = false;
-    bool renderElements = false;
-    bool disableInGameValues = false;
-    bool startGame = false;
-    bool displayEndScreen = false;
-    bool qKeyPressed = false;
+    bool mouseClicked = false; //flaga sterowana klikniêciem myszy
+    bool disableInGameValues = false; // flaga kontrolujaca ilosc blokow na mapie
+    bool startGame = false; //flaga zmieniajaca ekran
+    bool displayEndScreen = false; //flaga zmieniajaca ekran
+    bool qKeyPressed = false; //flaga kontrolujaca wcisniecie "Q"
 
-    int mapOption = 0;
+    int mapOption = 0; //wybor mapy 0-4
 
-	float gameSpeed;
-	int tanksInGame;
-	int boxesInGame;
-	int bricksInGame;
-	int wallsInGame;
+	float gameSpeed; //predkosc gry
+	int tanksInGame; //liczba przeciwnikow
+	int boxesInGame; //liczba skrzyn na mapie
+	int bricksInGame; //liczba murow na mapie
+	int wallsInGame; // liczba scian na mapie
 
 public:
-    Game();
-    void gameStart();
-    void loadTextures();
+    Game(); //konstruktor gry
+    void gameStart(); //metoda obslugujaca grê
+    void loadTextures(); //wczytywanie tekstur
 };
 
