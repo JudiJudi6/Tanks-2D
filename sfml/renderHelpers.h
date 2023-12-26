@@ -1,12 +1,10 @@
-#include <SFML/Graphics.hpp>
-#include "Tank.h"
-#include "Bullet.h"
-#include "Wall.h"
-#include "Brick.h"	
-#include "Box.h"
-#include "Mine.h"
-#include "BonusEvent.h"
 #pragma once
+#include "Wall.h"
+#include "Brick.h"
+#include "Box.h"
+#include "Tank.h"
+#include "BonusEvent.h"
+#include "Mine.h"
 
 extern std::vector<Wall> walls;
 extern std::vector<Brick> bricks;

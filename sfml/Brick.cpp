@@ -1,8 +1,4 @@
 #include "Brick.h"
-#include "Wall.h"
-#include "renderHelpers.h"
-#include <SFML/Graphics.hpp>
-#include "Bullet.h"
 
 Brick::Brick(sf::Vector2f position, sf::Texture* texture) : Wall(position, texture) {}
 

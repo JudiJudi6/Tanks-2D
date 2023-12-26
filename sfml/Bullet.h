@@ -1,15 +1,13 @@
-#ifndef BULLET_H
-#define BULLET_H
 #pragma once
 #include <SFML/Graphics.hpp>
 
 class Bullet
 {
 private:
-    sf::Texture texture;
-    sf::Vector2f velocity;
-    sf::Clock shotClock;
-    int damage;
+    sf::Texture texture; //tekstura
+    sf::Vector2f velocity; //prêdkoœæ pocisku
+    sf::Clock shotClock; //zegar, co 2 sekundy mo¿na ponownie wystrzeliæ
+    int damage; //uszkodzenia na strza³
 
 public:
     Bullet();
@@ -23,6 +21,4 @@ public:
 
     int getDamage();
 };
-#undef BULLET_H
-#endif // BULLET_H
 

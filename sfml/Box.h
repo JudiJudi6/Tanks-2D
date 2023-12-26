@@ -1,8 +1,8 @@
-#include <SFML/Graphics.hpp>
-#include "Bullet.h"
-#include "Wall.h"
-
 #pragma once
+#include <SFML/Graphics.hpp>
+#include "Wall.h"
+#include "Bullet.h"
+
 class Box: public Wall
 {
 public:

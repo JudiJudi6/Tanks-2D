@@ -1,10 +1,6 @@
-#include <SFML/Graphics.hpp>
-#include "Tank.h"
-#include "Bullet.h"
-#include "Brick.h"	
-#include "Box.h"
-#include "Mine.h"
 #pragma once
+#include <SFML/Graphics.hpp>
+
 class Game
 {
     sf::Texture mapTexture;
@@ -73,6 +69,12 @@ class Game
 	int bricksInGame; //liczba murow na mapie
 	int wallsInGame; // liczba scian na mapie
 
+
+
+
+
+    void drawText(sf::RenderWindow& window, const std::string& text, const sf::Vector2f& position, int number = -1);
+    void drawTextFloat(sf::RenderWindow& window, const std::string& text, const sf::Vector2f& position, float number = -1);
 public:
     Game(); //konstruktor gry
     void gameStart(); //metoda obslugujaca grê

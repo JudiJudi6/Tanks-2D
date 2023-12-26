@@ -1,2 +1,3 @@
 #include "Game.h"
-void main(){ Game game; }
+//void WinMain(){ Game game; }
+void main() { Game game; }

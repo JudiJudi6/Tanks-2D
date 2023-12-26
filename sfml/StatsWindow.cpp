@@ -48,22 +48,22 @@ void drawTextFloat(sf::RenderWindow& window, const std::string& text, const sf::
 
     window.draw(displayText);
 }
-
-void addKill() {
+ 
+void addKill() { // dodaj zniszczenie
     destroyedTanks++;
 }
-
-void startGameTime() {
+ 
+void startGameTime() { // zegar start
     countTime = true;
     gameTimeClock.restart();
 }
 
-void countGameTime() {
+void countGameTime() { // funkcja licz¹ca czas w sekundach w zale¿noœci od flagi count time
     if (countTime) {
         gameTime = gameTimeClock.getElapsedTime().asSeconds();
     }
 }
 
-void stopGameTime() {
+void stopGameTime() { // zegar stop
     countTime = false;
 }

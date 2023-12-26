@@ -1,5 +1,8 @@
-#include "Tank.h"
+#pragma once
 #include <SFML/Graphics.hpp>
+#include "Tank.h"
+#include "Bullet.h"
+
 #pragma once
 class BonusEvent
 {

@@ -35,22 +35,22 @@ void Bullet::shot(sf::Vector2f direction, float x, float y, int damage){
     }
 }
 
-void Bullet::updateBullet() {
+void Bullet::updateBullet() { // metoda "poruszaj¹ca pociskiem"
     this->body.setTexture(&texture);
      this->body.move(velocity);
 }
 
-void Bullet::setActive(bool isActive) {
+void Bullet::setActive(bool isActive) { // metoda zmieniaj¹ca aktywnoœæ pocisku
     active = isActive;
     body.setPosition(10000, 10000);
 }
 
-void Bullet::drawBullet(sf::RenderWindow& window) {
+void Bullet::drawBullet(sf::RenderWindow& window) { // metoda rysuj¹ca
     if (active) {
         window.draw(body);
     }
 }
 
-int Bullet::getDamage() {
+int Bullet::getDamage() { // getter uszkodzeñ pocisku
     return damage;
 }

@@ -1,10 +1,5 @@
+#include "Global.h"
 #include "Tank.h"
-#include "Bullet.h"
-#include "StatsWindow.h"
-#include "renderHelpers.h"
-#include "BonusEvent.h"
-#include "Mine.h"
-#include <iostream>
 
 Tank::Tank(sf::Vector2f position, float speed, int flag) {
     this->speed = speed;
@@ -13,12 +8,12 @@ Tank::Tank(sf::Vector2f position, float speed, int flag) {
     this->stopped = false;
 
     if (flag == 1) {
-        texture = playerTexture;
-        textureHitted = playerTextureHitted;
+        texture = Global::getInstance().playerTexture;
+        textureHitted = Global::getInstance().playerTextureHitted;
     }
     else if (flag == 0) {
-        texture = enemyTexture;
-        textureHitted = enemyTextureHitted;
+        texture = Global::getInstance().enemyTexture;
+        textureHitted = Global::getInstance().enemyTextureHitted;
     }
     this->body.setOrigin(sf::Vector2f(22.5, 22.5));
     this->healthPoints = 300;
@@ -133,7 +128,7 @@ void Tank::respawnEnemy() {
     if (respawn) {
         if (killedTime.asSeconds() + 10 < gameTime) {
             setHealthPoints(300);
-            body.setPosition(getRandomCordsForEnemySpawn());
+            body.setPosition(Global::getInstance().getRandomCordsForEnemySpawn());
             setHealthPoints(getHealthPoints() + 30);
             setDamage(getDamage() + 10);
             respawn = false;
@@ -165,7 +160,7 @@ void Tank::setHealthPoints(int points) {
 
 void Tank::enemyGetKilled() {
     if (rand() % 3 > 0) {
-        bonusEvents.push_back(BonusEvent(rand() % 4, body.getPosition()));
+        Global::getInstance().bonusEvents.push_back(BonusEvent(rand() % 4, body.getPosition()));
     }
     body.setPosition(11000, 11000);
     addKill();
@@ -267,14 +262,14 @@ bool Tank::isWallBetweenTanks(const Tank& playerTank) {
         float min_x = std::min(playerTankBounds.left, enemyTankBounds.left);
         float max_x = std::max(playerTankBounds.left + playerTankBounds.width, enemyTankBounds.left + enemyTankBounds.width);
 
-        for (const Wall& wall : walls) {
+        for (const Wall& wall : Global::getInstance().walls) {
             sf::FloatRect wallBounds = wall.body.getGlobalBounds();
             if (wallBounds.top + 20 > playerTankBounds.top && wallBounds.top + 20 < playerTankBounds.top + playerTankBounds.height &&
                 wallBounds.left > min_x && wallBounds.left < max_x) {
                 return true;
             }
         }
-        for (const Brick& brick: bricks) {
+        for (const Brick& brick: Global::getInstance().bricks) {
             sf::FloatRect wallBounds = brick.body.getGlobalBounds();
             if (wallBounds.top + 20 > playerTankBounds.top && wallBounds.top + 20 < playerTankBounds.top + playerTankBounds.height &&
                 wallBounds.left > min_x && wallBounds.left < max_x) {
@@ -287,14 +282,14 @@ bool Tank::isWallBetweenTanks(const Tank& playerTank) {
         float min_y = std::min(playerTankBounds.top, enemyTankBounds.top);
         float max_y = std::max(playerTankBounds.top + playerTankBounds.height, enemyTankBounds.top + enemyTankBounds.height);
 
-        for (const Wall& wall : walls) {
+        for (const Wall& wall : Global::getInstance().walls) {
             sf::FloatRect wallBounds = wall.body.getGlobalBounds();
             if (wallBounds.left + 20 > playerTankBounds.left && wallBounds.left + 20 < playerTankBounds.left + playerTankBounds.width &&
                 wallBounds.top > min_y && wallBounds.top < max_y) {
                 return true; 
             }
         }
-        for (const Brick& brick : bricks) {
+        for (const Brick& brick : Global::getInstance().bricks) {
             sf::FloatRect wallBounds = brick.body.getGlobalBounds();
             if (wallBounds.left + 20 > playerTankBounds.left && wallBounds.left + 20 < playerTankBounds.left + playerTankBounds.width &&
                 wallBounds.top > min_y && wallBounds.top < max_y) {
@@ -314,7 +309,7 @@ bool Tank::castRays(const sf::Vector2f& newPosition) {
     shape.setOrigin(22.5, 22.5);
     shape.move(newPosition);
     
-    for (const Wall& wall : walls) {
+    for (const Wall& wall : Global::getInstance().walls) {
         sf::FloatRect wallBounds = wall.body.getGlobalBounds();
 
         if (wallBounds.intersects(shape.getGlobalBounds())) {
@@ -322,7 +317,7 @@ bool Tank::castRays(const sf::Vector2f& newPosition) {
         }
     }
 
-    for (const Brick& brick: bricks) {
+    for (const Brick& brick: Global::getInstance().bricks) {
         sf::FloatRect brickBounds = brick.body.getGlobalBounds();
 
         if (brickBounds.intersects(shape.getGlobalBounds())) {
@@ -330,7 +325,7 @@ bool Tank::castRays(const sf::Vector2f& newPosition) {
         }
     }
 
-    for (const Box& box: boxes) {
+    for (const Box& box: Global::getInstance().boxes) {
         sf::FloatRect boxBounds = box.body.getGlobalBounds();
 
         if (boxBounds.intersects(shape.getGlobalBounds())) {
@@ -342,7 +337,7 @@ bool Tank::castRays(const sf::Vector2f& newPosition) {
 }
 
 void Tank::eventBonusIntersects() {
-    for (BonusEvent& bonusEvent : bonusEvents) {
+    for (BonusEvent& bonusEvent : Global::getInstance().bonusEvents) {
         sf::FloatRect tankBounds = body.getGlobalBounds();
         sf::FloatRect bonusBounds = bonusEvent.body.getGlobalBounds();
 
@@ -353,7 +348,7 @@ void Tank::eventBonusIntersects() {
 }
 
 void Tank::mineIntersects() {
-    for (Mine& mine : minesOnMap) {
+    for (Mine& mine : Global::getInstance().minesOnMap) {
         sf::FloatRect tankBounds = body.getGlobalBounds();
         sf::FloatRect mineBounds = mine.body.getGlobalBounds();
 
@@ -398,3 +393,27 @@ void Tank::useOneMine() {
 int Tank::getMines() {
     return this->mines;
 }
+
+void Tank::addKill() { // dodaj zniszczenie
+    destroyedTanks++;
+}
+
+void Tank::startGameTime() { // zegar start
+    countTime = true;
+    gameTimeClock.restart();
+}
+
+void Tank::countGameTime() { // funkcja licz¹ca czas w sekundach w zale¿noœci od flagi count time
+    if (countTime) {
+        gameTime = gameTimeClock.getElapsedTime().asSeconds();
+    }
+}
+
+void Tank::stopGameTime() { // zegar stop
+    countTime = false;
+}
+
+int Tank::destroyedTanks = 0;
+int Tank::gameTime = 0;
+bool Tank::countTime = false;
+sf::Clock Tank::gameTimeClock;

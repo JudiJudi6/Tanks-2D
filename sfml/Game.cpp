@@ -1,15 +1,6 @@
 #include "Game.h"
-#include <SFML/Graphics.hpp>
-#include "Tank.h"
-#include "Bullet.h"
-#include "renderHelpers.h"
-#include "Wall.h"
-#include "Brick.h"
-#include "Box.h"
-#include "BonusEvent.h"
-#include "Mine.h"
-#include "StatsWindow.h"
-
+#include <iostream>
+#include "Global.h"
 
 Game::Game() {
 	tanksInGame = 3;
@@ -28,9 +19,14 @@ void Game::gameStart() {
     Tank playerTank(sf::Vector2f(450, 400), 1.6f * gameSpeed, 1); //obiekt player tank
     Bullet playerBullet; //obiekt player bullet
 
+    window.setFramerateLimit(30);
+
+    sf::Clock clock;
+    sf::Time elapsed;
+    unsigned int frameCount = 0;
 
     std::srand(std::time(0));
-    sf::Clock clock;
+    sf::Clock frameClock;
     clock.restart();
 
     while (window.isOpen()) {
@@ -61,24 +57,24 @@ void Game::gameStart() {
 
                         for (int i = 0; i < cordXarr.size(); i++) {
                             for (int j = 0; j < cordYarr.size(); j++) {
-                                availablePlace.push_back(sf::Vector2f(cordXarr[i], cordYarr[j]));
+                                Global::getInstance().availablePlace.push_back(sf::Vector2f(cordXarr[i], cordYarr[j]));
                             }
                         }
                         for (int i = 0; i < tanksInGame; i++) { //generowanie przeciwników
-                            enemyTanks.push_back(Tank(getRandomCordsForEnemySpawn(), 1.0f * gameSpeed, 0));
-                            enemyBullets.push_back(Bullet());
+                            Global::getInstance().enemyTanks.push_back(Tank(Global::getInstance().getRandomCordsForEnemySpawn(), 1.0f * gameSpeed, 0));
+                            Global::getInstance().enemyBullets.push_back(Bullet());
                         }
 
                         for (int i = 0; i < wallsInGame; i++) { //generowanie œcian
-                            walls.push_back(Wall(getRandomCordsForWalls(), &wallTexture));
+                            Global::getInstance().walls.push_back(Wall(Global::getInstance().getRandomCordsForWalls(), &Global::getInstance().wallTexture));
                         }
 
                         for (int i = 0; i < bricksInGame; i++) { //generowanie murów
-                            bricks.push_back(Brick(getRandomCordsForWalls(), &brickTexture));
+                            Global::getInstance().bricks.push_back(Brick(Global::getInstance().getRandomCordsForWalls(), &Global::getInstance().brickTexture));
                         }
 
                         for (int i = 0; i < boxesInGame; i++) { //generowanie skrzyñ
-                            boxes.push_back(Box(getRandomCordsForWalls(), &boxTexture));
+                            Global::getInstance().boxes.push_back(Box(Global::getInstance().getRandomCordsForWalls(), &Global::getInstance().boxTexture));
                         }
                     }
                     else if (mapOption == 1) {
@@ -105,20 +101,20 @@ void Game::gameStart() {
                         boxesInGame = boxCoords.size();
 
                         for (const auto& coords : wallCoords) { //generowanie œcian
-                            walls.push_back(Wall(coords, &wallTexture));
+                            Global::getInstance().walls.push_back(Wall(coords, &Global::getInstance().wallTexture));
                         }
 
                         for (const auto& coords : brickCoords) { //generowanie murów
-                            bricks.push_back(Brick(coords, &brickTexture));
+                            Global::getInstance().bricks.push_back(Brick(coords, &Global::getInstance().brickTexture));
                         }
 
                         for (const auto& coords : boxCoords) { //generowanie skrzyñ
-                            boxes.push_back(Box(coords, &boxTexture));
+                            Global::getInstance().boxes.push_back(Box(coords, &Global::getInstance().boxTexture));
                         }
 
                         for (int i = 0; i < tanksInGame; i++) { //generowanie przeciwników
-                            enemyTanks.push_back(Tank(getRandomCordsForEnemySpawn(), 1.0f * gameSpeed, 0));
-                            enemyBullets.push_back(Bullet());
+                            Global::getInstance().enemyTanks.push_back(Tank(Global::getInstance().getRandomCordsForEnemySpawn(), 1.0f * gameSpeed, 0));
+                            Global::getInstance().enemyBullets.push_back(Bullet());
                         }
                     }
                     else if (mapOption == 2) { 
@@ -166,20 +162,20 @@ void Game::gameStart() {
                         boxesInGame = boxCoords.size();
 
                         for (const auto& coords : wallCoords) { //generowanie œcian
-                            walls.push_back(Wall(coords, &wallTexture));
+                            Global::getInstance().walls.push_back(Wall(coords, &Global::getInstance().wallTexture));
                         }
 
                         for (const auto& coords : brickCoords) { //generowanie murów
-                            bricks.push_back(Brick(coords, &brickTexture));
+                            Global::getInstance().bricks.push_back(Brick(coords, &Global::getInstance().brickTexture));
                         }
 
                         for (const auto& coords : boxCoords) { //generowanie skrzyñ
-                            boxes.push_back(Box(coords, &boxTexture));
+                            Global::getInstance().boxes.push_back(Box(coords, &Global::getInstance().boxTexture));
                         }
 
                         for (int i = 0; i < tanksInGame; i++) { //generowanie przeciwników
-                            enemyTanks.push_back(Tank(getRandomCordsForEnemySpawn(), 1.0f * gameSpeed, 0));
-                            enemyBullets.push_back(Bullet());
+                            Global::getInstance().enemyTanks.push_back(Tank(Global::getInstance().getRandomCordsForEnemySpawn(), 1.0f * gameSpeed, 0));
+                            Global::getInstance().enemyBullets.push_back(Bullet());
                         }
                     }
                     else if (mapOption == 3) {
@@ -223,20 +219,20 @@ void Game::gameStart() {
                         boxesInGame = boxCoords.size();
 
                         for (const auto& coords : wallCoords) {
-                            walls.push_back(Wall(coords, &wallTexture));
+                            Global::getInstance().walls.push_back(Wall(coords, &Global::getInstance().wallTexture));
                         }
 
                         for (const auto& coords : brickCoords) {
-                            bricks.push_back(Brick(coords, &brickTexture));
+                            Global::getInstance().bricks.push_back(Brick(coords, &Global::getInstance().brickTexture));
                         }
 
                         for (const auto& coords : boxCoords) {
-                            boxes.push_back(Box(coords, &boxTexture));
+                            Global::getInstance().boxes.push_back(Box(coords, &Global::getInstance().boxTexture));
                         }
 
                         for (int i = 0; i < tanksInGame; i++) {
-                            enemyTanks.push_back(Tank(getRandomCordsForEnemySpawn(), 1.0f * gameSpeed, 0));
-                            enemyBullets.push_back(Bullet());
+                            Global::getInstance().enemyTanks.push_back(Tank(Global::getInstance().getRandomCordsForEnemySpawn(), 1.0f * gameSpeed, 0));
+                            Global::getInstance().enemyBullets.push_back(Bullet());
                         }
                         }
                     else if (mapOption == 4) {
@@ -278,25 +274,25 @@ void Game::gameStart() {
                         boxesInGame = boxCoords.size();
 
                         for (const auto& coords : wallCoords) {
-                            walls.push_back(Wall(coords, &wallTexture));
+                            Global::getInstance().walls.push_back(Wall(coords, &Global::getInstance().wallTexture));
                         }
 
                         for (const auto& coords : brickCoords) {
-                            bricks.push_back(Brick(coords, &brickTexture));
+                            Global::getInstance().bricks.push_back(Brick(coords, &Global::getInstance().brickTexture));
                         }
 
                         for (const auto& coords : boxCoords) {
-                            boxes.push_back(Box(coords, &boxTexture));
+                            Global::getInstance().boxes.push_back(Box(coords, &Global::getInstance().boxTexture));
                         }
 
                         for (int i = 0; i < tanksInGame; i++) {
-                            enemyTanks.push_back(Tank(getRandomCordsForEnemySpawn(), 1.0f * gameSpeed, 0));
-                            enemyBullets.push_back(Bullet());
+                            Global::getInstance().enemyTanks.push_back(Tank(Global::getInstance().getRandomCordsForEnemySpawn(), 1.0f * gameSpeed, 0));
+                            Global::getInstance().enemyBullets.push_back(Bullet());
                         }
                     }
 
                     startGame = true;
-                    startGameTime();
+                    playerTank.startGameTime();
                 }
 
                 if (mousePosition.x > tanksInGameIncrese.getGlobalBounds().left && mousePosition.x < tanksInGameIncrese.getGlobalBounds().left + tanksInGameIncrese.getGlobalBounds().width
@@ -372,17 +368,10 @@ void Game::gameStart() {
                     startGame = false;
                     playerTank.setHealthPoints(300);
                     playerTank.body.setPosition(sf::Vector2f(450, 400));
-                    destroyedTanks = 0;
+                    playerTank.destroyedTanks = 0;
 
                     tanksInGame = 3;
-                    walls.clear();
-                    bricks.clear();
-                    boxes.clear();
-                    enemyTanks.clear();
-                    enemyBullets.clear();
-                    availablePlace.clear();
-                    bonusEvents.clear();
-                    minesOnMap.clear();
+                    Global::getInstance().clearVectors();
                 }
 
                 if (mousePosition.x > oneButton.getGlobalBounds().left && mousePosition.x < oneButton.getGlobalBounds().left + oneButton.getGlobalBounds().width
@@ -417,16 +406,16 @@ void Game::gameStart() {
             mouseClicked = false;
         }
 
-        if (sf::Keyboard::isKeyPressed(sf::Keyboard::W)) {
+        if (sf::Keyboard::isKeyPressed(sf::Keyboard::W) || sf::Keyboard::isKeyPressed(sf::Keyboard::Up)) {
             playerTank.moveTop();
         }
-        if (sf::Keyboard::isKeyPressed(sf::Keyboard::A)) {
+        if (sf::Keyboard::isKeyPressed(sf::Keyboard::A) || sf::Keyboard::isKeyPressed(sf::Keyboard::Left)) {
             playerTank.moveLeft();
         }
-        if (sf::Keyboard::isKeyPressed(sf::Keyboard::S)) {
+        if (sf::Keyboard::isKeyPressed(sf::Keyboard::S) || sf::Keyboard::isKeyPressed(sf::Keyboard::Down)) {
             playerTank.moveBottom();
         }
-        if (sf::Keyboard::isKeyPressed(sf::Keyboard::D)) {
+        if (sf::Keyboard::isKeyPressed(sf::Keyboard::D) || sf::Keyboard::isKeyPressed(sf::Keyboard::Right)) {
             playerTank.moveRight();
         }
         if (sf::Keyboard::isKeyPressed(sf::Keyboard::Space)) {
@@ -435,7 +424,7 @@ void Game::gameStart() {
         if (sf::Keyboard::isKeyPressed(sf::Keyboard::Q)) {
             if (!qKeyPressed) {
                 if (playerTank.getMines() > 0) {
-                    minesOnMap.push_back(Mine(playerTank.body.getPosition()));
+                    Global::getInstance().minesOnMap.push_back(Mine(playerTank.body.getPosition()));
                     playerTank.useOneMine();
                 }
                 qKeyPressed = true;
@@ -445,13 +434,13 @@ void Game::gameStart() {
             qKeyPressed = false;
         }
 
-        countGameTime();
+        playerTank.countGameTime();
         window.clear();
         window.draw(map);
 
         if (startGame) {
-            for (int i = 0; i < minesOnMap.size(); i++) {
-                window.draw(minesOnMap[i].body);
+            for (int i = 0; i < Global::getInstance().minesOnMap.size(); i++) {
+                window.draw(Global::getInstance().minesOnMap[i].body);
             }
 
             playerBullet.drawBullet(window);
@@ -459,49 +448,49 @@ void Game::gameStart() {
             playerTank.eventBonusIntersects();
 
             for (int i = 0; i < tanksInGame; i++) {
-                enemyTanks[i].getHitted(playerBullet);
-                enemyTanks[i].getHittedAnimation();
-                playerTank.getHitted(enemyBullets[i]);
-                enemyBullets[i].drawBullet(window);
-                enemyBullets[i].updateBullet();
-                enemyTanks[i].drawTank(window);
-                enemyTanks[i].enemyIntelligence(playerTank, enemyBullets[i], clock);
-                enemyTanks[i].respawnEnemy();
-                enemyTanks[i].eventBonusIntersects();
-                enemyTanks[i].mineIntersects();
+                Global::getInstance().enemyTanks[i].getHitted(playerBullet);
+                Global::getInstance().enemyTanks[i].getHittedAnimation();
+                playerTank.getHitted(Global::getInstance().enemyBullets[i]);
+                Global::getInstance().enemyBullets[i].drawBullet(window);
+                Global::getInstance().enemyBullets[i].updateBullet();
+                Global::getInstance().enemyTanks[i].drawTank(window);
+                Global::getInstance().enemyTanks[i].enemyIntelligence(playerTank, Global::getInstance().enemyBullets[i], clock);
+                Global::getInstance().enemyTanks[i].respawnEnemy();
+                Global::getInstance().enemyTanks[i].eventBonusIntersects();
+                Global::getInstance().enemyTanks[i].mineIntersects();
 
-                for (int j = 0; j < bonusEvents.size(); j++) {
-                    bonusEvents[j].getDestroyed(enemyBullets[i]);
-                    bonusEvents[j].getDestroyed(playerBullet);
+                for (int j = 0; j < Global::getInstance().bonusEvents.size(); j++) {
+                    Global::getInstance().bonusEvents[j].getDestroyed(Global::getInstance().enemyBullets[i]);
+                    Global::getInstance().bonusEvents[j].getDestroyed(playerBullet);
                 }
             }
 
             for (int i = 0; i < bricksInGame; i++) {
-                window.draw(bricks[i].body);
-                for (int j = 0; j < enemyBullets.size(); j++) {
-                    bricks[i].GetHitted(enemyBullets[j]);
+                window.draw(Global::getInstance().bricks[i].body);
+                for (int j = 0; j < Global::getInstance().enemyBullets.size(); j++) {
+                    Global::getInstance().bricks[i].GetHitted(Global::getInstance().enemyBullets[j]);
                 }
-                bricks[i].GetHitted(playerBullet);
+                Global::getInstance().bricks[i].GetHitted(playerBullet);
             }
 
             for (int i = 0; i < boxesInGame; i++) {
-                window.draw(boxes[i].body);
-                for (int j = 0; j < enemyBullets.size(); j++) {
-                    boxes[i].GetHitted(enemyBullets[j]);
+                window.draw(Global::getInstance().boxes[i].body);
+                for (int j = 0; j < Global::getInstance().enemyBullets.size(); j++) {
+                    Global::getInstance().boxes[i].GetHitted(Global::getInstance().enemyBullets[j]);
                 }
-                boxes[i].GetHitted(playerBullet);
+                Global::getInstance().boxes[i].GetHitted(playerBullet);
             }
 
             for (int i = 0; i < wallsInGame; i++) {
-                window.draw(walls[i].body);
-                for (int j = 0; j < enemyBullets.size(); j++) {
-                    walls[i].GetHitted(enemyBullets[j]);
+                window.draw(Global::getInstance().walls[i].body);
+                for (int j = 0; j < Global::getInstance().enemyBullets.size(); j++) {
+                    Global::getInstance().walls[i].GetHitted(Global::getInstance().enemyBullets[j]);
                 }
-                walls[i].GetHitted(playerBullet);
+                Global::getInstance().walls[i].GetHitted(playerBullet);
             }
 
-            for (int i = 0; i < bonusEvents.size(); i++) {
-                bonusEvents[i].drawEvent(window);
+            for (int i = 0; i < Global::getInstance().bonusEvents.size(); i++) {
+                Global::getInstance().bonusEvents[i].drawEvent(window);
             }
         }
         else {
@@ -588,7 +577,7 @@ void Game::gameStart() {
         }
 
         if (playerTank.getHealthPoints() <= 0) {
-            stopGameTime();
+            playerTank.stopGameTime();
             playerTank.setHealthPoints(0);
             playerTank.setDamage(100);
             playerTank.setSpeed(1.6f * gameSpeed);
@@ -604,11 +593,11 @@ void Game::gameStart() {
             battleButton.setPosition(0, 0);
             window.draw(restartButton);
 
-            int minutes = gameTime / 60;
-            int seconds = gameTime % 60;
+            int minutes = playerTank.gameTime / 60;
+            int seconds = playerTank.gameTime % 60;
 
             drawText(window, "Game over", sf::Vector2f(400, 300));
-            drawText(window, "Points: ", sf::Vector2f(350, 340), gameTime + ((destroyedTanks - 1) * 15));
+            drawText(window, "Points: ", sf::Vector2f(350, 340), playerTank.gameTime + ((playerTank.destroyedTanks - 1) * 15));
             drawText(window, "Game time: ", sf::Vector2f(350, 380), minutes);
             if (seconds < 10) {
                 drawText(window, ": 0", sf::Vector2f(470, 380), seconds);
@@ -616,7 +605,7 @@ void Game::gameStart() {
             else {
                 drawText(window, ": ", sf::Vector2f(470, 380), seconds);
             }
-            drawText(window, "Destroyed enemies: ", sf::Vector2f(350, 420), destroyedTanks - 1);
+            drawText(window, "Destroyed enemies: ", sf::Vector2f(350, 420), playerTank.destroyedTanks - 1);
 
             drawText(window, "Tanks 2D", sf::Vector2f(240, 240));
         }
@@ -624,8 +613,8 @@ void Game::gameStart() {
         playerBullet.updateBullet();
         playerTank.getHittedAnimation();
         window.draw(panel);
-        drawText(window, "Kills: ", sf::Vector2f(950, 200), destroyedTanks);
-        drawText(window, "Game time: ", sf::Vector2f(950, 300), gameTime);
+        drawText(window, "Kills: ", sf::Vector2f(950, 200), playerTank.destroyedTanks);
+        drawText(window, "Game time: ", sf::Vector2f(950, 300), playerTank.gameTime);
         drawText(window, "Hit points: ", sf::Vector2f(950, 400), playerTank.getHealthPoints());
         drawText(window, "Damage: ", sf::Vector2f(950, 500), playerTank.getDamage());
         if (playerTank.getSpeed() == 5.0f) {
@@ -638,22 +627,25 @@ void Game::gameStart() {
         drawText(window, "Q to place", sf::Vector2f(950, 730));
 
         window.display();
+        // Pomiar czasu miêdzy klatkami
+        elapsed = frameClock.restart();
+
+        // Zliczanie klatek
+        frameCount++;
+
+        // Wyœwietlanie liczby klatek co sekundê
+        if (elapsed.asSeconds() <= 1) {
+            float fps = static_cast<float>(frameCount) / elapsed.asSeconds();
+            std::cout << "FPS: " << fps << std::endl;
+
+            // Zerowanie licznika klatek
+            frameCount = 0;
+        }
     }
 }
 
 void Game::loadTextures() {
-    texture1.loadFromFile("health.png");
-    texture2.loadFromFile("dmg.png");
-    texture3.loadFromFile("speed.png");
-    texture4.loadFromFile("bombAdd.png");
-    boxTexture.loadFromFile("box.png");
-    brickTexture.loadFromFile("bricks.png");
-    wallTexture.loadFromFile("wall.png");
-    bomb.loadFromFile("bomb.png");
-    playerTexture.loadFromFile("player.png");
-    playerTextureHitted.loadFromFile("playerHitted.png");
-    enemyTexture.loadFromFile("enemy.png");
-    enemyTextureHitted.loadFromFile("enemyHitted.png");
+    Global::getInstance().loadTextures();
     mapTexture.loadFromFile("map.jpg");
     panelTexture.loadFromFile("panel.png");
     welcomeScreenTexture.loadFromFile("welcomeScreen.png");
@@ -771,4 +763,48 @@ void Game::loadTextures() {
     gameSpeedDecrease.setTexture(&minusIconTexture);
     gameSpeedDecrease.setPosition(sf::Vector2f(550, 280));
     gameSpeedDecrease.setSize(sf::Vector2f(25, 25));
+}
+
+
+
+void Game::drawText(sf::RenderWindow& window, const std::string& text, const sf::Vector2f& position, int number) {
+    sf::Font font;
+    font.loadFromFile("roboto.ttf");
+    std::string fullText;
+    sf::Text displayText;
+    displayText.setFont(font);
+    displayText.setCharacterSize(20);
+    displayText.setFillColor(sf::Color::White);
+
+    if (number == -1) {
+        fullText = text;
+    }
+    else {
+        fullText = text + std::to_string(number);
+    }
+    displayText.setString(fullText);
+    displayText.setPosition(position);
+
+    window.draw(displayText);
+}
+
+void Game::drawTextFloat(sf::RenderWindow& window, const std::string& text, const sf::Vector2f& position, float number) {
+    sf::Font font;
+    font.loadFromFile("roboto.ttf");
+    std::string fullText;
+    sf::Text displayText;
+    displayText.setFont(font);
+    displayText.setCharacterSize(20);
+    displayText.setFillColor(sf::Color::White);
+
+    if (number == -1) {
+        fullText = text;
+    }
+    else {
+        fullText = text + std::to_string(std::round(number * 10) / 10);
+    }
+    displayText.setString(fullText);
+    displayText.setPosition(position);
+
+    window.draw(displayText);
 }

@@ -1,5 +1,6 @@
+#include <SFML/Graphics.hpp>
 #include "BonusEvent.h"
-#include "renderHelpers.h"
+#include "Global.h"
 
 BonusEvent::BonusEvent(int flag, sf::Vector2f position) {
 	this->flag = flag;
@@ -8,16 +9,16 @@ BonusEvent::BonusEvent(int flag, sf::Vector2f position) {
 	body.setPosition(position);
 
 	if (flag == 0) {
-		body.setTexture(&texture1);
+		body.setTexture(&Global::getInstance().texture1);
 	}
 	if (flag == 1) {
-		body.setTexture(&texture2);
+		body.setTexture(&Global::getInstance().texture2);
 	}
 	if (flag == 2) {
-		body.setTexture(&texture3);
+		body.setTexture(&Global::getInstance().texture3);
 	}
 	if (flag == 3) {
-		body.setTexture(&texture4);
+		body.setTexture(&Global::getInstance().texture4);
 	}
 	body.setOrigin(sf::Vector2f(17.5f, 17.5f));
 }
@@ -41,7 +42,7 @@ void BonusEvent::action(Tank &tank) {
 
 	//speed bonus
 	if (flag == 2) {
-		tank.setSpeed(tank.getSpeed() + 0.2);
+		tank.setSpeed(tank.getSpeed() + 0.2f);
 		body.setPosition(-100, -200);
 	}
 

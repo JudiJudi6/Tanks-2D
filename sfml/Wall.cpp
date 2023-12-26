@@ -1,7 +1,4 @@
 #include "Wall.h"
-#include <SFML/Graphics.hpp>
-#include "renderHelpers.h"
-#include "Bullet.h"
 
 Wall::Wall(sf::Vector2f position, sf::Texture* texture) {
     this->body.setSize(sf::Vector2f(50, 50));

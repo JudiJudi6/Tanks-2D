@@ -1,6 +1,6 @@
-#include <SFML/Graphics.hpp>
-#include "Tank.h"
 #pragma once
+#include <SFML/Graphics.hpp>
+
 class Mine
 {
 private:

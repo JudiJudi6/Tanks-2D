@@ -1,7 +1,7 @@
+#pragma once
 #include <SFML/Graphics.hpp>
 #include "Bullet.h"
 
-#pragma once
 class Wall
 {
 private:

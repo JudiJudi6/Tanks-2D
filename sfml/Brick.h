@@ -1,8 +1,8 @@
-#include "Wall.h"
+#pragma once
 #include <SFML/Graphics.hpp>
 #include "Wall.h"
+#include "Bullet.h"
 
-#pragma once
 class Brick: public Wall 
 {
 public:
