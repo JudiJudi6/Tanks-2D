@@ -413,6 +413,7 @@ void Tank::stopGameTime() { // zegar stop
     countTime = false;
 }
 
+// Zmienne statyczne:
 int Tank::destroyedTanks = 0;
 int Tank::gameTime = 0;
 bool Tank::countTime = false;

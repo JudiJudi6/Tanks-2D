@@ -73,8 +73,8 @@ class Game
 
 
 
-    void drawText(sf::RenderWindow& window, const std::string& text, const sf::Vector2f& position, int number = -1);
-    void drawTextFloat(sf::RenderWindow& window, const std::string& text, const sf::Vector2f& position, float number = -1);
+    void drawText(sf::RenderWindow& window, const std::string& text, const sf::Vector2f& position, int number = -1); //metoda rysuj¹ca tekst
+    void drawTextFloat(sf::RenderWindow& window, const std::string& text, const sf::Vector2f& position, float number = -1); //metoda rysuj¹ca tekst
 public:
     Game(); //konstruktor gry
     void gameStart(); //metoda obslugujaca grê

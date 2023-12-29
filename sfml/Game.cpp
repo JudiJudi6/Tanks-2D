@@ -19,11 +19,11 @@ void Game::gameStart() {
     Tank playerTank(sf::Vector2f(450, 400), 1.6f * gameSpeed, 1); //obiekt player tank
     Bullet playerBullet; //obiekt player bullet
 
-    window.setFramerateLimit(30);
-
-    sf::Clock clock;
-    sf::Time elapsed;
-    unsigned int frameCount = 0;
+    window.setFramerateLimit(30); // ustawienie sta³ej liczby FPS
+     
+    sf::Clock clock; //zegar do obliczania FPS
+    sf::Time elapsed; // obs³uga licznika FPS
+    unsigned int frameCount = 0; // obs³uga licznika FPS
 
     std::srand(std::time(0));
     sf::Clock frameClock;

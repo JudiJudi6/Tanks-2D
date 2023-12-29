@@ -1,3 +1,7 @@
 #include "Game.h"
-//void WinMain(){ Game game; }
-void main() { Game game; }
+
+//bez konsoli
+void WinMain(){ Game game; }
+
+// Z konsol¹
+//void main() { Game game; }
